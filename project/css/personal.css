@@ -1,0 +1,53 @@
+.personal {
+  width: 100%;
+  padding: 2.13vw;
+}
+.navi-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.13vw 0;
+}
+.User {
+  display: flex;
+  align-items: center;
+  gap: 2.13vw;
+}
+.notifications {
+  height: 7vw;
+  padding: 2.13vw;
+  background: #fe0135;
+  color: #ffffff;
+  border-radius: 3vw;
+  line-height: 2.5vw;
+  letter-spacing: 0.2vw;
+}
+.user-proflie-data {
+  display: flex;
+  align-items: center;
+  gap: 16vw;
+  padding: 2.13vw 0;
+}
+.Avater .bg-circle {
+  width: 24vw;
+  height: 24vw;
+}
+.Avater .border {
+  width: 22.5vw;
+  height: 22.5vw;
+}
+.Avater .border img {
+  display: block;
+  width: 20.5vw;
+  height: 20.5vw;
+}
+.data ul {
+  display: flex;
+  gap: 4.26vw;
+  padding: 1vw 0;
+  font-size: 4.26vw;
+}
+.data ul:nth-child(1) {
+  margin-bottom: 2.13vw;
+  font-weight: 600;
+}

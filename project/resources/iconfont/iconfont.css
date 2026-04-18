@@ -1,0 +1,117 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1776425086880') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrowleft:before {
+  content: "\e626";
+}
+
+.icon-share:before {
+  content: "\e6f3";
+}
+
+.icon-message:before {
+  content: "\e78a";
+}
+
+.icon-star:before {
+  content: "\e7df";
+}
+
+.icon-fire:before {
+  content: "\e842";
+}
+
+.icon-user:before {
+  content: "\e677";
+}
+
+.icon-close:before {
+  content: "\e664";
+}
+
+.icon-settings:before {
+  content: "\e699";
+}
+
+.icon-home:before {
+  content: "\e608";
+}
+
+.icon-bell:before {
+  content: "\e887";
+}
+
+.icon-pinglun:before {
+  content: "\e647";
+}
+
+.icon-Draft:before {
+  content: "\eaaa";
+}
+
+.icon-add:before {
+  content: "\e695";
+}
+
+.icon-eye:before {
+  content: "\e67b";
+}
+
+.icon-following:before {
+  content: "\e60a";
+}
+
+.icon-24px:before {
+  content: "\e60d";
+}
+
+.icon-eye-off:before {
+  content: "\e600";
+}
+
+.icon-moon:before {
+  content: "\e601";
+}
+
+.icon-log-out:before {
+  content: "\e602";
+}
+
+.icon-user1:before {
+  content: "\e697";
+}
+
+.icon-sun:before {
+  content: "\e886";
+}
+
+.icon-user-plus:before {
+  content: "\e6b5";
+}
+
+.icon-edit:before {
+  content: "\e77d";
+}
+
+.icon-search:before {
+  content: "\e627";
+}
+
+.icon-history:before {
+  content: "\ea03";
+}
+
+.icon-a-gf-dots1:before {
+  content: "\e618";
+}
+
