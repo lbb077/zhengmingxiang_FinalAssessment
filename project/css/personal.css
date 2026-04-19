@@ -1,12 +1,11 @@
 .personal {
   width: 100%;
-  padding: 2.13vw;
 }
 .navi-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2.13vw 0;
+  padding: 2.13vw;
 }
 .User {
   display: flex;
@@ -26,7 +25,7 @@
   display: flex;
   align-items: center;
   gap: 16vw;
-  padding: 2.13vw 0;
+  padding: 2.13vw;
 }
 .Avater .bg-circle {
   width: 24vw;
@@ -48,6 +47,135 @@
   font-size: 4.26vw;
 }
 .data ul:nth-child(1) {
-  margin-bottom: 2.13vw;
   font-weight: 600;
+  font-size: 6vw;
+  gap: 6.6vw;
+}
+.data ul:nth-child(2) {
+  gap: 2.13vw;
+}
+.userName-and-info {
+  padding: 2.13vw;
+  font-size: 4.26vw;
+}
+.userName-and-info .username {
+  font-weight: 600;
+  font-size: 6vw;
+}
+.userName-and-info .desc {
+  color: rgba(0, 0, 0, 0.7);
+}
+.follower-desc span:nth-child(1) {
+  color: rgba(0, 0, 0, 0.7);
+}
+.follower-desc span:nth-child(2) {
+  color: #000000;
+  font-size: 500;
+}
+.avaters {
+  display: flex;
+  position: relative;
+}
+.avaters .border {
+  width: 12vw;
+  height: 12vw;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avaters .border img {
+  width: 11vw;
+  height: 11vw;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.avaters .border:nth-child(2) {
+  transform: translateX(-5vw);
+}
+.avaters .border:nth-child(3) {
+  position: absolute;
+  transform: translateX(14vw);
+}
+.profile-follower {
+  display: flex;
+  gap: 4.26vw;
+  padding: 2.13vw 0;
+}
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 10.8vw;
+  gap: 2.13vw;
+  padding-bottom: 2.13vw;
+}
+.buttons button {
+  background: #efefef;
+  padding: 2.13vw;
+  border-radius: 1.78vw;
+  font-size: 4.26vw;
+  font-weight: 600;
+}
+.buttons button i {
+  display: block;
+  font-size: 4.6vw;
+}
+.tab-navi-bar ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-top: 2.13vw;
+}
+.tab-navi-bar ul li {
+  padding: 2.13vw 4.26vw;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+}
+.tab-navi-bar i {
+  font-size: 8vw;
+}
+.picked {
+  color: #000000 !important;
+}
+.grid-photos-view ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.33vw;
+}
+.grid-photos-view {
+  overflow: hidden;
+}
+.icons {
+  display: flex;
+  gap: 2.13vw;
+}
+.icons i {
+  font-size: 4.6vw;
+  color: #000000;
+}
+.text-view ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6.6vw;
+}
+.plog {
+  width: 100%;
+  padding: 4.26vw 2.13vw;
+  border-radius: 2.13vw;
+  background: #efefef;
+  box-shadow:
+    0 1.6vw 4vw rgba(0, 0, 0, 0.06),
+    0 0.5vw 1.2vw rgba(0, 0, 0, 0.04);
+}
+.plog-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.plog p {
+  padding: 2.13vw 0;
+}
+.plog-info .icons {
+  font-size: 4.26vw;
+}
+.plog-head {
+  font-size: 6.6vw;
+  font-weight: 500;
 }

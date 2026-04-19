@@ -1,0 +1,96 @@
+.message-page {
+  width: 100%;
+}
+.message-head {
+  font-size: 8.8vw;
+  font-weight: 600;
+  padding: 4.26vw 3.26vw;
+}
+.message-item {
+  display: flex;
+  align-items: center;
+  gap: 1.78vw;
+  padding: 2.13vw;
+}
+.dot {
+  width: 1.78vw;
+  height: 1.78vw;
+  border-radius: 50%;
+  background: #fe0135;
+}
+.avater {
+  width: 12.78vw;
+  height: 12.78vw;
+  border-radius: 50%;
+}
+.talker-name {
+  font-size: 4.26vw;
+  font-weight: 600;
+}
+.the-last {
+  color: rgba(0, 0, 0, 0.7);
+}
+.category {
+  padding: 0 3.26vw;
+  overflow: hidden;
+}
+.category ul {
+  display: flex;
+  gap: 2.13vw;
+}
+.category li {
+  padding: 2.13vw 4.26vw;
+  border-radius: 10vw;
+  border: 0.78vw solid #e6e6e6;
+  font-size: 4.26vw;
+  transition: all 0.3s ease;
+}
+.category-picked {
+  background: #000000;
+  color: #ffffff;
+}
+.chat-page {
+  width: 100%;
+  padding: 0 2.13vw;
+}
+.chat-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 2.13vw;
+}
+.talker-info {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+.chat-head i {
+  font-size: 6.26vw;
+}
+.talker img {
+  width: 8.8vw;
+  height: 8.8vw;
+  border-radius: 50%;
+}
+.head-icons {
+  display: flex;
+  align-items: center;
+  gap: 2.13vw;
+}
+.footer-input {
+  position: relative;
+}
+.chat-icons {
+  position: absolute;
+}
+.footer-input input {
+  padding: 2.13vw 4.26vw;
+  border: 0.35vw solid #d6d6d6;
+  border-radius: 4vw;
+  background: #fff;
+  outline: none;
+  transition: all 0.25s ease;
+}
+.footer-input input:focus {
+  border-color: #9a9a9a;
+  box-shadow: 0 0 0 0.8vw rgba(0, 0, 0, 0.08);
+}
