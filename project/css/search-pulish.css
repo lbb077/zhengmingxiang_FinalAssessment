@@ -124,3 +124,69 @@ textarea::placeholder {
 .match-item .post-action i {
   display: inline;
 }
+.head-title {
+  padding: 4.26vw 2.13vw;
+  border-radius: 3vw;
+  border-bottom: 0.078vw solid #efefef;
+  box-shadow:
+    0 2vw 5vw rgba(0, 0, 0, 0.08),
+    inset 0 0.27vw 0 rgba(255, 255, 255, 0.6);
+  font-size: 5.2vw;
+}
+.result-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 4.26vw;
+  margin-bottom: 4.26vw;
+}
+.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 14vw;
+  height: 14vw;
+  border-radius: 50%;
+  border: 0.078vw solid #efefef;
+  box-shadow:
+    0 2vw 5vw rgba(0, 0, 0, 0.08),
+    inset 0 0.27vw 0 rgba(255, 255, 255, 0.6);
+}
+.back i {
+  font-size: 6.6vw;
+}
+.input-topic {
+  width: 0;
+}
+.fn-btns button {
+  padding: 2.13vw 3.14vw;
+  border-radius: 4vw;
+  font-size: 4.26vw;
+  border: 0.078vw solid #efefef;
+  transition: all 0.3s ease;
+}
+.fn-btns {
+  margin: 2.13vw 0;
+}
+.pulish-btn {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-content: space-between;
+  gap: 1.78vw;
+}
+.pulish-btn .pulish {
+  width: 72vw;
+  padding: 3.26vw;
+  background: #000000;
+  color: #ffffff;
+  font-size: 4.26vw;
+  border-radius: 3vw;
+}
+.pulish-btn .draft {
+  width: 22vw;
+  padding: 3.26vw;
+  font-size: 4.26vw;
+  border-radius: 3vw;
+  background: #9a9a9a;
+  color: #ffffff;
+}

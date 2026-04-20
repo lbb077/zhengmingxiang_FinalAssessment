@@ -1086,7 +1086,10 @@
       </div>
       <div class="pulish-footer">
         <div class="fn-btns">
-          <button id="add-topic">add topic</button>
+          <div class="add-topic">
+            <button id="add-topic">add topic</button>
+            <input class="input-topic" placeholder="topic" id="input-topic" />
+          </div>
           <button id="at-friend">@friend</button>
         </div>
         <div class="pulish-btn">
@@ -1129,12 +1132,17 @@
       </div>
     </div>
     <div class="search-result-page">
-      <div class="reult-head">
-        <h2>
-          There are
-          <span class="result-count">100+</span>
-          results
-        </h2>
+      <div class="result-head">
+        <div class="back">
+          <i class="iconfont icon-arrowleft"></i>
+        </div>
+        <div class="head-title">
+          <h2>
+            There are
+            <span class="result-count">100+</span>
+            results
+          </h2>
+        </div>
       </div>
       <div class="search-result">
         <ul class="items">
