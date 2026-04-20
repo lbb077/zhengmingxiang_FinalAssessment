@@ -83,7 +83,8 @@
   position: absolute;
 }
 .footer-input input {
-  padding: 2.13vw 4.26vw;
+  width: 100%;
+  padding: 4.26vw;
   border: 0.35vw solid #d6d6d6;
   border-radius: 4vw;
   background: #fff;
@@ -93,4 +94,20 @@
 .footer-input input:focus {
   border-color: #9a9a9a;
   box-shadow: 0 0 0 0.8vw rgba(0, 0, 0, 0.08);
+}
+.footer-input input::placeholder {
+  font-size: 4.26vw;
+  color: rgba(0, 0, 0, 0.7);
+}
+.footer-input {
+  position: relative;
+}
+.footer-input .chat-icons {
+  position: absolute;
+  right: 4.26vw;
+  bottom: 3.13vw;
+}
+.chat-icons i {
+  font-size: 6.26vw;
+  margin: 0 1vw;
 }

@@ -1,0 +1,126 @@
+.pulish-page {
+  padding: 2.13vw;
+}
+.pulish-head {
+  display: flex;
+  gap: 6.6vw;
+  padding: 2.13vw 0;
+  border-bottom: 0.078vw solid #efefef;
+}
+.pulish-head input {
+  display: block;
+  width: 100%;
+  padding: 4.26vw;
+  border-radius: 3vw;
+  transition: all 0.3s ease;
+  outline: none;
+}
+.pulish-head input:focus {
+  border-color: #9a9a9a;
+  box-shadow: 0 0 0 0.8vw rgba(0, 0, 0, 0.08);
+}
+.pulish-head input::placeholder {
+  font-size: 4.26vw;
+  color: rgba(0, 0, 0, 0.7);
+}
+.pulish-head .avater {
+  width: 16vw;
+  height: 16vw;
+  border-radius: 50%;
+}
+
+.pulish-head .avater img {
+  width: 16vw;
+  height: 16vw;
+  border-radius: 50%;
+}
+.pulish-footer .fn-btns {
+  display: flex;
+  gap: 2.13vw;
+}
+.pulish-footer .pulish-btn {
+  display: flex;
+  gap: 2.13vw;
+}
+.pulish-content input {
+  display: none;
+}
+.pulish-content label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24vw;
+  height: 24vw;
+  margin: 2.13vw 0;
+  border-radius: 6vw;
+  border: 0.5vw solid rgba(0, 0, 0, 0.8);
+}
+.pulish-content label i {
+  font-size: 6.6vw;
+}
+.pulish-content {
+  padding: 4.26vw 0;
+}
+textarea::placeholder {
+  font-size: 4.26vw;
+  color: rgba(0, 0, 0, 0.7);
+}
+.search-page {
+  padding: 4.26vw 2.13vw;
+}
+.search-page .search-bar .icon {
+  transform: translateY(-50%);
+}
+.search-bar #clean {
+  color: #000000;
+  position: absolute;
+  font-size: 6.6vw;
+  right: 18vw;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.search-content .item {
+  padding: 2.13vw 4.26vw;
+  border-bottom: 0.078vw solid #efefef;
+}
+.search-content .item p {
+  font-size: 5.26vw;
+}
+.search-result-page {
+  padding: 2.13vw;
+}
+.search-result .items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.13vw;
+}
+.search-result .match-item {
+  width: 100%;
+  padding: 2.13vw;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  border: 0.27vw solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 2vw 5vw rgba(0, 0, 0, 0.08),
+    inset 0 0.27vw 0 rgba(255, 255, 255, 0.6);
+}
+.hot {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+.hot-comment {
+  display: flex;
+  align-items: center;
+  gap: 2.13vw;
+  padding: 1.78vw 0;
+}
+.match-item .description {
+  font-size: 4.26vw;
+}
+.match-item .post-action {
+  display: block;
+}
+.match-item .post-action i {
+  display: inline;
+}

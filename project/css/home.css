@@ -30,7 +30,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2.13vw 6.6vw;
+  padding: 4.26vw 6.6vw;
   background: #ffffff;
 }
 .app-logo {
@@ -294,4 +294,33 @@
 }
 .item-number p {
   padding: 2.13vw;
+}
+.search-bar {
+  position: relative;
+  padding: 2.13vw;
+}
+.search-bar input {
+  width: 100%;
+  padding: 4.26vw;
+  border: 0.3vw solid #e4e4e4;
+  border-radius: 4vw;
+  box-shadow: 0 0.8vw 2vw rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+.search-bar input::placeholder {
+  font-size: 4.26vw;
+  color: rgba(0, 0, 0, 0.4);
+}
+.search-bar .icon {
+  position: absolute;
+  right: 4.13vw;
+  top: 50%;
+  padding: 2.13vw;
+  background: #5179ef;
+  border-radius: 3vw;
+  transform: translateY(-50%);
+}
+.search-bar i {
+  font-size: 6.6vw;
+  color: #ffffff;
 }

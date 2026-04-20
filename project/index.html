@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="./css/personal.css" />
     <!-- 接入消息页面的样式 -->
     <link rel="stylesheet" href="./css/message.css" />
+    <!-- 接入发布页面的样式 -->
+    <link rel="stylesheet" href="./css/search-pulish.css" />
   </head>
   <body>
     <div class="sign-in">
@@ -65,6 +67,10 @@
           </ul>
           <div class="indicater"></div>
         </div>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." id="go-to-search" />
+        <div class="icon"><i class="iconfont icon-24px"></i></div>
       </div>
       <div class="for-you">
         <div class="layout-left">
@@ -1058,6 +1064,213 @@
           <i class="iconfont icon-24px"></i>
           <i class="iconfont icon-24px"></i>
         </div>
+      </div>
+    </div>
+    <div class="pulish-page">
+      <div class="pulish-head">
+        <div class="avater">
+          <img
+            src="./resources/test photos/test-user-img.jpg"
+            alt=""
+            class="avater-img"
+          />
+        </div>
+        <input type="text" placeholder="add title" id="pulish-title" />
+      </div>
+      <div class="pulish-content">
+        <input type="file" multiple id="pulish-image" />
+        <label for="pulish-image">
+          <i class="iconfont icon-add"></i>
+        </label>
+        <textarea placeholder="add content" id="pulish-content"></textarea>
+      </div>
+      <div class="pulish-footer">
+        <div class="fn-btns">
+          <button id="add-topic">add topic</button>
+          <button id="at-friend">@friend</button>
+        </div>
+        <div class="pulish-btn">
+          <button id="draft" class="draft">draft</button>
+          <button id="pulish" class="pulish">pulish</button>
+        </div>
+      </div>
+    </div>
+    <div class="search-page">
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." id="to-search" />
+        <i class="iconfont icon-24px" id="clean"></i>
+        <div class="icon">
+          <i class="iconfont icon-24px"></i>
+        </div>
+      </div>
+      <div class="search-content">
+        <ul class="search-history">
+          <li class="item">
+            <p>taffy</p>
+          </li>
+          <li class="item">
+            <p>taffy</p>
+          </li>
+          <li class="item">
+            <p>taffy</p>
+          </li>
+        </ul>
+        <ul class="search-match">
+          <li class="item">
+            <p>taffy</p>
+          </li>
+          <li class="item">
+            <p>taffy</p>
+          </li>
+          <li class="item">
+            <p>taffy</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="search-result-page">
+      <div class="reult-head">
+        <h2>
+          There are
+          <span class="result-count">100+</span>
+          results
+        </h2>
+      </div>
+      <div class="search-result">
+        <ul class="items">
+          <li class="match-item">
+            <div class="photo">
+              <div class="post">
+                <div class="post-head">
+                  <div class="avater">
+                    <div class="avater-img">
+                      <img
+                        src="./resources/test photos/test-user-img.jpg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="avater-infos">
+                      <p class="avater-id">Rikka</p>
+                      <p class="time">3 hours ago</p>
+                    </div>
+                  </div>
+                  <i class="iconfont icon-a-gf-dots1"></i>
+                </div>
+                <img
+                  src="./resources/test photos/test-user-img.jpg"
+                  alt=""
+                  class="image"
+                />
+                <div class="description">
+                  <p>Post description</p>
+                  <div class="post-action">
+                    <i class="iconfont icon-24px"></i>
+                    <span>100+ Likes</span>
+                    <div class="pinlun">
+                      <i class="iconfont icon-pinglun" id="pinlun"></i>
+                      <span>100+ commonts</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="hot-comment">
+                  <div class="hot">
+                    <i class="iconfont icon-fire"></i>
+                    <span class="hot-number">100+</span>
+                  </div>
+                  <p class="hot-content">666</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="match-item">
+            <div class="photo">
+              <div class="post">
+                <div class="post-head">
+                  <div class="avater">
+                    <div class="avater-img">
+                      <img
+                        src="./resources/test photos/test-user-img.jpg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="avater-infos">
+                      <p class="avater-id">Rikka</p>
+                      <p class="time">3 hours ago</p>
+                    </div>
+                  </div>
+                  <i class="iconfont icon-a-gf-dots1"></i>
+                </div>
+                <img
+                  src="./resources/test photos/test-user-img.jpg"
+                  alt=""
+                  class="image"
+                />
+                <div class="description">
+                  <p>Post description</p>
+                  <div class="post-action">
+                    <i class="iconfont icon-24px"></i>
+                    <span>100+ Likes</span>
+                    <div class="pinlun">
+                      <i class="iconfont icon-pinglun" id="pinlun"></i>
+                      <span>100+ commonts</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="hot-comment">
+                  <div class="hot">
+                    <i class="iconfont icon-fire"></i>
+                    <span class="hot-number">100+</span>
+                  </div>
+                  <p class="hot-content">666</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="match-item">
+            <div class="photo">
+              <div class="post">
+                <div class="post-head">
+                  <div class="avater">
+                    <div class="avater-img">
+                      <img
+                        src="./resources/test photos/test-user-img.jpg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="avater-infos">
+                      <p class="avater-id">Rikka</p>
+                      <p class="time">3 hours ago</p>
+                    </div>
+                  </div>
+                  <i class="iconfont icon-a-gf-dots1"></i>
+                </div>
+                <img
+                  src="./resources/test photos/test-user-img.jpg"
+                  alt=""
+                  class="image"
+                />
+                <div class="description">
+                  <p>Post description</p>
+                  <div class="post-action">
+                    <i class="iconfont icon-24px"></i>
+                    <span>100+ Likes</span>
+                    <div class="pinlun">
+                      <i class="iconfont icon-pinglun" id="pinlun"></i>
+                      <span>100+ commonts</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="hot-comment">
+                  <div class="hot">
+                    <i class="iconfont icon-fire"></i>
+                    <span class="hot-number">100+</span>
+                  </div>
+                  <p class="hot-content">666</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="bottom-top-bar">
