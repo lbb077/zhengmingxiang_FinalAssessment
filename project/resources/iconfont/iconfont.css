@@ -1,6 +1,8 @@
 @font-face {
-  font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1776425086880') format('truetype');
+  font-family: "iconfont"; /* Project id 5163041 */
+  src: url('iconfont.woff2?t=1776688987838') format('woff2'),
+       url('iconfont.woff?t=1776688987838') format('woff'),
+       url('iconfont.ttf?t=1776688987838') format('truetype');
 }
 
 .iconfont {
@@ -9,6 +11,46 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-quxiao:before {
+  content: "\e621";
+}
+
+.icon-emoji:before {
+  content: "\e628";
+}
+
+.icon-dianhua:before {
+  content: "\e64c";
+}
+
+.icon-drafts:before {
+  content: "\e62a";
+}
+
+.icon-icon-:before {
+  content: "\e60e";
+}
+
+.icon-shipin:before {
+  content: "\eafb";
+}
+
+.icon-wangge:before {
+  content: "\e881";
+}
+
+.icon-yuyin:before {
+  content: "\e8c0";
+}
+
+.icon-sousuo:before {
+  content: "\e63b";
+}
+
+.icon-t-box-line:before {
+  content: "\e770";
 }
 
 .icon-arrowleft:before {
@@ -33,6 +75,10 @@
 
 .icon-user:before {
   content: "\e677";
+}
+
+.icon-message1:before {
+  content: "\e70c";
 }
 
 .icon-close:before {
@@ -89,6 +135,10 @@
 
 .icon-user1:before {
   content: "\e697";
+}
+
+.icon-log-out1:before {
+  content: "\e73d";
 }
 
 .icon-sun:before {

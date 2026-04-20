@@ -74,7 +74,7 @@ textarea::placeholder {
 .search-bar #clean {
   color: #000000;
   position: absolute;
-  font-size: 6.6vw;
+  font-size: 4.6vw;
   right: 18vw;
   top: 50%;
   transform: translateY(-50%);
