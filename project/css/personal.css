@@ -179,3 +179,10 @@
   font-size: 6.6vw;
   font-weight: 500;
 }
+.other .tab-navi-bar ul {
+  grid-template-columns: repeat(2, 1fr);
+}
+.other .edit-profile {
+  background: #000000;
+  color: #ffffff;
+}

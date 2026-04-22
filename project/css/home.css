@@ -2,11 +2,11 @@
 }
 .bottom-top-bar {
   position: fixed;
-  bottom: 0;
+  bottom: -1.2vw;
   left: 0;
   width: 100%;
   height: 15vw;
-  padding: 2.13vw 6.6vw;
+  padding: 4.26vw 6.6vw;
   margin-top: 2.13vw;
   background: #ffffff;
   z-index: 1;
@@ -60,7 +60,7 @@
   height: 1vw;
   background: #000000;
   border-radius: 0.5vw;
-  transition: 0.3s;
+  transition: 0.4s;
   transform: translateX(5.5vw);
 }
 .follow-user {
@@ -323,4 +323,15 @@
 .search-bar i {
   font-size: 6.6vw;
   color: #ffffff;
+}
+.bottom-top-bar li i.active-tab {
+  color: #000000;
+}
+.mode-active {
+  display: block !important;
+}
+.ForYou,
+.Follow,
+.Topic {
+  display: none;
 }

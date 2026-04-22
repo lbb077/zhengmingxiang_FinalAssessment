@@ -194,3 +194,21 @@ body {
   font-size: 3vw;
   color: var(--title-color);
 }
+.input {
+  position: relative;
+}
+.eye-icons {
+  position: absolute;
+  top: 50%;
+  right: 4.26vw;
+  transform: translateY(-50%);
+  font-size: 4.26vw;
+  color: var(--secondary-text-color);
+}
+.eye-icons i {
+  display: none;
+  font-size: 5.26vw;
+}
+.eye-active {
+  display: block !important;
+}
