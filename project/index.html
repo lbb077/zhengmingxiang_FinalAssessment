@@ -452,32 +452,16 @@
       <div class="post-header">
         <div class="avater-info">
           <i class="iconfont icon-arrowleft"></i>
-          <img
-            src="./resources/test photos/test-user-img.jpg"
-            alt="#"
-            class="detial-avater"
-          />
-          <div class="poster-name">Rikka</div>
+          <img src="" alt="" class="detial-avater" />
+          <p class="poster-name"></p>
           <button class="follow-me">follow</button>
         </div>
 
         <i class="iconfont icon-a-gf-dots1"></i>
       </div>
       <div class="detial-banner">
-        <ul class="photoset">
-          <li>
-            <img src="./resources/test photos/test-user-img.jpg" alt="#" />
-          </li>
-          <li>
-            <img src="./resources/test photos/test-user-img.jpg" alt="#" />
-          </li>
-          <li>
-            <img src="./resources/test photos/test-user-img.jpg" alt="#" />
-          </li>
-        </ul>
+        <ul class="photoset"></ul>
         <ul class="circle">
-          <li></li>
-          <li></li>
           <li></li>
         </ul>
       </div>
@@ -485,13 +469,17 @@
         <div class="left">
           <ul>
             <li>
-              <i class="iconfont icon-24px"></i>
+              <button type="button" class="like-btn">
+                <i class="iconfont icon-24px like-icon"></i>
+              </button>
             </li>
             <li>
               <i class="iconfont icon-pinglun"></i>
             </li>
             <li>
-              <i class="iconfont icon-star"></i>
+              <button type="button" class="collect-btn">
+                <i class="iconfont icon-star collect-icon"></i>
+              </button>
             </li>
           </ul>
         </div>
@@ -501,22 +489,25 @@
       </div>
       <div class="detial-dsec">
         <div class="text">
-          <p>100+ Likes</p>
-          <span>
-            introduction Username Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt
-          </span>
+          <p></p>
+          <span> </span>
         </div>
       </div>
       <div class="add-comment">
         <img
           src="./resources/test photos/test-user-img.jpg"
           alt="#"
-          class="detial-avater"
+          class="detial-avater comment-avater"
         />
-        <input type="text" placeholder="add your comment" id="comment" />
+        <input
+          type="text"
+          placeholder="add your comment"
+          id="comment"
+          class="comment-input"
+        />
+        <button class="push-comment">submit</button>
       </div>
-      <div class="comments">
+      <div class="comments comment-list">
         <div class="comment-item">
           <div class="commenter">
             <img

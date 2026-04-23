@@ -71,7 +71,7 @@ function renderPosts() {
   posts.forEach((post, index) => {
     let html = "";
 
-    if (post.image) {
+    if (post.images.length > 0) {
       html = `
        <li class="item" data-id="${post.id}">
                 <div class="photo">
@@ -92,7 +92,7 @@ function renderPosts() {
                       <i class="iconfont icon-a-gf-dots1"></i>
                     </div>
                     <img
-                      src="${posts[index].image}"
+                      src="${posts[index].images[0]}"
                       alt=""
                       class="image"
                     />
