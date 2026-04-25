@@ -1,4 +1,5 @@
 import { getElement, addEvent } from "./utils.js";
+import request from "./request.js";
 
 const loginBtn = getElement(".login-btn");
 const loginIdInput = getElement(".login-id");
@@ -8,9 +9,6 @@ const rememberBox = getElement(".remember-box");
 const eyeBtn = getElement(".eye-icons");
 const closeEye = getElement(".icon-eye-off");
 const openEye = getElement(".icon-eye");
-
-const correctId = "123456";
-const correctPwd = "123456";
 
 let isRemember = false;
 
@@ -87,21 +85,37 @@ addEvent(loginBtn, "click", function () {
     return;
   }
 
-  if (id !== correctId || pwd !== correctPwd) {
-    showError("Incorrect account or password");
-    return;
-  }
-
   clearError();
-  localStorage.setItem("token", "123456");
 
-  if (isRemember) {
-    saveRememberInfo(id, pwd);
-  } else {
-    removeRememberInfo();
-  }
+  request("/user/login", "POST", {
+    account: id,
+    password: pwd,
+  })
+    .then(function (res) {
+      const result = res.data;
 
-  location.hash = "#home";
+      if (result.code === 200) {
+        const userData = result.data;
+        const token = userData.token;
+        const userId = userData.userId;
+
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", userId);
+
+        if (isRemember) {
+          saveRememberInfo(id, pwd);
+        } else {
+          removeRememberInfo();
+        }
+
+        location.hash = "#home";
+      } else {
+        showError("Incorrect account or password");
+      }
+    })
+    .catch(function (error) {
+      console.log("Request error:", error);
+    });
 });
 
 addEvent(loginIdInput, "input", function () {
