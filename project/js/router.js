@@ -35,7 +35,7 @@ function router() {
     "#publish",
     "#search-result",
   ];
-  if (!token && userPage.includes(hashPage)) {
+  if (!token && userPage.includes(hashPage.split("?")[0])) {
     location.hash = "#login";
   }
   if (token && (hashPage === "" || hashPage === "#login")) {
@@ -46,8 +46,9 @@ function router() {
   }
   hideAllPages();
   const hash = window.location.hash || "#login";
+  const pageName = hash.split("?")[0];
 
-  switch (hash) {
+  switch (pageName) {
     case "#login":
       getElement(".sign-in").style.display = "block";
       break;
@@ -94,7 +95,7 @@ function router() {
       getElement(".search-result-page").style.display = "block";
       break;
   }
-  toggleBottomBar(hash);
+  toggleBottomBar(pageName);
   if (hash.startsWith("#post-detials")) {
     getElement(".post-detials").style.display = "block";
     renderPostDetail();

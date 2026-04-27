@@ -49,7 +49,7 @@
 .data ul:nth-child(1) {
   font-weight: 600;
   font-size: 6vw;
-  gap: 6.6vw;
+  gap: 16.6vw;
 }
 .data ul:nth-child(2) {
   gap: 2.13vw;
