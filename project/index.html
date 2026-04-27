@@ -32,9 +32,23 @@
           <p>Enter your email to sign up for this app</p>
         </div>
         <div class="input">
-          <input type="text" placeholder="input your Id" />
-          <input type="password" placeholder="input your password" />
-          <button>sign in</button>
+          <input type="text" placeholder="input your Id" class="login-id" />
+          <div class="pwd">
+            <input
+              type="password"
+              placeholder="input your password"
+              class="password"
+            />
+            <div class="eye-icons">
+              <i class="iconfont icon-eye-off eye-active"></i>
+              <i class="iconfont icon-eye"></i>
+            </div>
+          </div>
+          <div class="remember-box">
+            <div class="remember-button"></div>
+            <p>remember id and password</p>
+          </div>
+          <button class="login-btn">sign in</button>
         </div>
         <div class="divider">
           <div class="left"></div>
@@ -72,350 +86,24 @@
         <input type="text" placeholder="Search..." id="go-to-search" />
         <div class="icon"><i class="iconfont icon-sousuo"></i></div>
       </div>
-      <div class="for-you">
-        <div class="layout-left">
-          <ul>
-            <li class="item">
-              <div class="photo">
-                <div class="post">
-                  <div class="post-head">
-                    <div class="avater">
-                      <div class="avater-img">
-                        <img
-                          src="./resources/test photos/test-user-img.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="avater-infos">
-                        <p class="avater-id">Rikka</p>
-                        <p class="time">3 hours ago</p>
-                      </div>
-                    </div>
-                    <i class="iconfont icon-a-gf-dots1"></i>
-                  </div>
-                  <img
-                    src="./resources/test photos/test-user-img.jpg"
-                    alt=""
-                    class="image"
-                  />
-                  <div class="description">
-                    <p>Post description</p>
-                    <div class="post-action">
-                      <i class="iconfont icon-24px"></i>
-                      <span>100+ Likes</span>
-                      <i class="iconfont icon-pinglun"></i>
-                      <span>100+ commonts</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="item">
-              <div class="only-text">
-                <div class="post">
-                  <div class="post-head">
-                    <div class="avater">
-                      <div class="avater-img">
-                        <img
-                          src="./resources/test photos/test-user-img.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="avater-infos">
-                        <p class="avater-id">Rikka</p>
-                        <p class="time">3 hours ago</p>
-                      </div>
-                    </div>
-                    <i class="iconfont icon-a-gf-dots1"></i>
-                  </div>
-                  <p class="post-content">
-                    Body text for a post. Since it's a social app, sometimes
-                    it's a hot take, and sometimes it's a question.
-                  </p>
-                  <div class="description">
-                    <div class="post-action">
-                      <i class="iconfont icon-24px"></i>
-                      <span>100+ Likes</span>
-                      <i class="iconfont icon-pinglun"></i>
-                      <span>100+ commonts</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="item">
-              <div class="photo">
-                <div class="post">
-                  <div class="post-head">
-                    <div class="avater">
-                      <div class="avater-img">
-                        <img
-                          src="./resources/test photos/test-user-img.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="avater-infos">
-                        <p class="avater-id">Rikka</p>
-                        <p class="time">3 hours ago</p>
-                      </div>
-                    </div>
-                    <i class="iconfont icon-a-gf-dots1"></i>
-                  </div>
-                  <img
-                    src="./resources/test photos/test-user-img.jpg"
-                    alt=""
-                    class="image"
-                  />
-                  <div class="description">
-                    <p>Post description</p>
-                    <div class="post-action">
-                      <i class="iconfont icon-24px"></i>
-                      <span>100+ Likes</span>
-                      <i class="iconfont icon-pinglun"></i>
-                      <span>100+ commonts</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="layout-right">
-          <ul>
-            <li class="item">
-              <div class="only-text">
-                <div class="post">
-                  <div class="post-head">
-                    <div class="avater">
-                      <div class="avater-img">
-                        <img
-                          src="./resources/test photos/test-user-img.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="avater-infos">
-                        <p class="avater-id">Rikka</p>
-                        <p class="time">3 hours ago</p>
-                      </div>
-                    </div>
-                    <i class="iconfont icon-a-gf-dots1"></i>
-                  </div>
-                  <p class="post-content">
-                    Small progress every day creates big change over time.
-                  </p>
-                  <div class="description">
-                    <div class="post-action">
-                      <i class="iconfont icon-24px"></i>
-                      <span>100+ Likes</span>
-                      <i class="iconfont icon-pinglun"></i>
-                      <span>100+ commonts</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="item">
-              <div class="photo">
-                <div class="post">
-                  <div class="post-head">
-                    <div class="avater">
-                      <div class="avater-img">
-                        <img
-                          src="./resources/test photos/test-user-img.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="avater-infos">
-                        <p class="avater-id">Rikka</p>
-                        <p class="time">3 hours ago</p>
-                      </div>
-                    </div>
-                    <i class="iconfont icon-a-gf-dots1"></i>
-                  </div>
-                  <img
-                    src="./resources/test photos/test-user-img.jpg"
-                    alt=""
-                    class="image"
-                  />
-                  <div class="description">
-                    <p>Post description</p>
-                    <div class="post-action">
-                      <i class="iconfont icon-24px"></i>
-                      <span>100+ Likes</span>
-                      <i class="iconfont icon-pinglun"></i>
-                      <span>100+ commonts</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="item">
-              <div class="only-text">
-                <div class="post">
-                  <div class="post-head">
-                    <div class="avater">
-                      <div class="avater-img">
-                        <img
-                          src="./resources/test photos/test-user-img.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="avater-infos">
-                        <p class="avater-id">Rikka</p>
-                        <p class="time">3 hours ago</p>
-                      </div>
-                    </div>
-                    <i class="iconfont icon-a-gf-dots1"></i>
-                  </div>
-                  <p class="post-content">
-                    Discipline matters more than motivation in difficult
-                    moments.
-                  </p>
-                  <div class="description">
-                    <div class="post-action">
-                      <i class="iconfont icon-24px"></i>
-                      <span>100+ Likes</span>
-                      <i class="iconfont icon-pinglun"></i>
-                      <span>100+ commonts</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
+      <div class="ForYou mode-active">
+        <div class="for-you">
+          <div class="layout-left">
+            <ul class="left-post-list"></ul>
+          </div>
+          <div class="layout-right">
+            <ul class="right-post-list"></ul>
+          </div>
         </div>
       </div>
-      <div class="follow">
-        <div class="follow-user">
-          <ul>
-            <li>
-              <div class="bg-circle">
-                <div class="border">
-                  <img
-                    src="./resources/test photos/test-user-img.jpg"
-                    alt="#"
-                  />
-                </div>
-              </div>
-              <div class="user-name">Rikka</div>
-            </li>
-            <li>
-              <div class="bg-circle">
-                <div class="border">
-                  <img
-                    src="./resources/test photos/test-user-img.jpg"
-                    alt="#"
-                  />
-                </div>
-              </div>
-              <div class="user-name">Rikka</div>
-            </li>
-            <li>
-              <div class="bg-circle">
-                <div class="border">
-                  <img
-                    src="./resources/test photos/test-user-img.jpg"
-                    alt="#"
-                  />
-                </div>
-              </div>
-              <div class="user-name">Rikka</div>
-            </li>
-            <li>
-              <div class="bg-circle">
-                <div class="border">
-                  <img
-                    src="./resources/test photos/test-user-img.jpg"
-                    alt="#"
-                  />
-                </div>
-              </div>
-              <div class="user-name">Rikka</div>
-            </li>
-            <li>
-              <div class="bg-circle">
-                <div class="border">
-                  <img
-                    src="./resources/test photos/test-user-img.jpg"
-                    alt="#"
-                  />
-                </div>
-              </div>
-              <div class="user-name">Rikka</div>
-            </li>
-            <li>
-              <div class="bg-circle">
-                <div class="border">
-                  <img
-                    src="./resources/test photos/test-user-img.jpg"
-                    alt="#"
-                  />
-                </div>
-              </div>
-              <div class="user-name">Rikka</div>
-            </li>
-            <li>
-              <div class="bg-circle">
-                <div class="border">
-                  <img
-                    src="./resources/test photos/test-user-img.jpg"
-                    alt="#"
-                  />
-                </div>
-              </div>
-              <div class="user-name">Rikka</div>
-            </li>
-          </ul>
-        </div>
-        <div class="follow-post">
-          <ul>
-            <li>
-              <div class="post-header">
-                <div class="avater-info">
-                  <div class="bg-circle">
-                    <div class="border">
-                      <img
-                        src="./resources/test photos/test-user-img.jpg"
-                        alt="#"
-                      />
-                    </div>
-                  </div>
-                  <div class="poster-name">Rikka</div>
-                </div>
-                <i class="iconfont icon-a-gf-dots1"></i>
-              </div>
-              <img src="./resources/test photos/test-user-img.jpg" alt="#" />
-              <div class="post-info">
-                <div class="icons">
-                  <div class="left">
-                    <ul>
-                      <li>
-                        <i class="iconfont icon-24px"></i>
-                      </li>
-                      <li>
-                        <i class="iconfont icon-pinglun"></i>
-                      </li>
-                      <li>
-                        <i class="iconfont icon-star"></i>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="right">
-                    <i class="iconfont icon-share"></i>
-                  </div>
-                </div>
-                <div class="text">
-                  <p>100+ Likes</p>
-                  <span>
-                    introduction Username Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt
-                  </span>
-                  <span class="more-btn">more</span>
-                </div>
-              </div>
-            </li>
-          </ul>
+      <div class="Follow">
+        <div class="follow">
+          <div class="follow-user">
+            <ul></ul>
+          </div>
+          <div class="follow-post">
+            <ul></ul>
+          </div>
         </div>
       </div>
       <div class="Topic">
@@ -641,32 +329,16 @@
       <div class="post-header">
         <div class="avater-info">
           <i class="iconfont icon-arrowleft"></i>
-          <img
-            src="./resources/test photos/test-user-img.jpg"
-            alt="#"
-            class="detial-avater"
-          />
-          <div class="poster-name">Rikka</div>
+          <img src="" alt="" class="detial-avater" />
+          <p class="poster-name"></p>
           <button class="follow-me">follow</button>
         </div>
 
         <i class="iconfont icon-a-gf-dots1"></i>
       </div>
       <div class="detial-banner">
-        <ul class="photoset">
-          <li>
-            <img src="./resources/test photos/test-user-img.jpg" alt="#" />
-          </li>
-          <li>
-            <img src="./resources/test photos/test-user-img.jpg" alt="#" />
-          </li>
-          <li>
-            <img src="./resources/test photos/test-user-img.jpg" alt="#" />
-          </li>
-        </ul>
+        <ul class="photoset"></ul>
         <ul class="circle">
-          <li></li>
-          <li></li>
           <li></li>
         </ul>
       </div>
@@ -674,13 +346,17 @@
         <div class="left">
           <ul>
             <li>
-              <i class="iconfont icon-24px"></i>
+              <button type="button" class="like-btn">
+                <i class="iconfont icon-24px like-icon"></i>
+              </button>
             </li>
             <li>
               <i class="iconfont icon-pinglun"></i>
             </li>
             <li>
-              <i class="iconfont icon-star"></i>
+              <button type="button" class="collect-btn">
+                <i class="iconfont icon-star collect-icon"></i>
+              </button>
             </li>
           </ul>
         </div>
@@ -690,22 +366,25 @@
       </div>
       <div class="detial-dsec">
         <div class="text">
-          <p>100+ Likes</p>
-          <span>
-            introduction Username Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt
-          </span>
+          <p></p>
+          <span> </span>
         </div>
       </div>
       <div class="add-comment">
         <img
           src="./resources/test photos/test-user-img.jpg"
           alt="#"
-          class="detial-avater"
+          class="detial-avater comment-avater"
         />
-        <input type="text" placeholder="add your comment" id="comment" />
+        <input
+          type="text"
+          placeholder="add your comment"
+          id="comment"
+          class="comment-input"
+        />
+        <button class="push-comment">submit</button>
       </div>
-      <div class="comments">
+      <div class="comments comment-list">
         <div class="comment-item">
           <div class="commenter">
             <img
@@ -715,10 +394,10 @@
             />
           </div>
           <div class="comment-info">
-            <p class="commenter-id">Rikka</p>
-            <p>我喜欢这个</p>
+            <p class="commenter-id"></p>
+            <p></p>
             <div class="icons-and-time">
-              <p class="time">3 hours ago</p>
+              <p class="time"></p>
               <div class="comment-icons">
                 <i class="iconfont icon-24px"></i>
                 <i class="iconfont icon-pinglun"></i>
@@ -744,6 +423,109 @@
           <i class="iconfont icon-settings"></i>
         </div>
       </div>
+      <div class="user-proflie-data">
+        <div class="Avater">
+          <div class="bg-circle">
+            <div class="border">
+              <img src="./resources/test photos/test-user-img.jpg" alt="#" />
+            </div>
+          </div>
+        </div>
+        <div class="data">
+          <ul>
+            <li class="posts"></li>
+            <li class="followers"></li>
+            <li class="following"></li>
+          </ul>
+          <ul>
+            <li class="">Posts</li>
+            <li class="">Followers</li>
+            <li class="">Following</li>
+          </ul>
+        </div>
+      </div>
+      <div class="userName-and-info">
+        <p class="username"></p>
+        <p class="desc"></p>
+        <div class="profile-follower">
+          <div class="avaters">
+            <div class="border" id="first-show-follower">
+              <img
+                src="./resources/test photos/test-user-img.jpg"
+                alt=""
+                class=""
+              />
+            </div>
+            <div class="border" id="second-show-follower">
+              <img
+                src="./resources/test photos/test-user-img.jpg"
+                alt=""
+                class=""
+              />
+            </div>
+            <div class="border" id="third-show-follower">
+              <img
+                src="./resources/test photos/test-user-img.jpg"
+                alt=""
+                class=""
+              />
+            </div>
+          </div>
+          <div class="follower-desc">
+            <span>Followed by</span>
+            <span>username, username</span>
+            <p>and 100 others</p>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="edit-profile">Edit Profile</button>
+          <button class="message">
+            <i class="iconfont icon-message"></i>
+          </button>
+        </div>
+        <div class="tab-navi-bar">
+          <ul>
+            <li class="picked">
+              <i class="iconfont icon-wangge"></i>
+            </li>
+            <li>
+              <i class="iconfont icon-t-box-line"></i>
+            </li>
+            <li>
+              <i class="iconfont icon-drafts"></i>
+            </li>
+          </ul>
+        </div>
+        <div class="grid-photos-view">
+          <ul>
+            <li>
+              <img
+                class="grid-photo"
+                src="./resources/test photos/test-user-img.jpg"
+                aly=""
+              />
+            </li>
+          </ul>
+        </div>
+        <div class="text-view">
+          <ul>
+            <li class="plog">
+              <h3 class="plog-head">taffy</h3>
+              <p>灌注塔菲喵,灌注塔菲谢谢喵</p>
+              <div class="plog-info">
+                <p class="push-time">2025-4-20</p>
+                <div class="icons">
+                  <i class="iconfont icon-24px"></i>
+                  <i class="iconfont icon-pinglun"></i>
+                  <i class="iconfont icon-share"></i>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="other">
       <div class="user-proflie-data">
         <div class="Avater">
           <div class="bg-circle">
@@ -799,7 +581,7 @@
           </div>
         </div>
         <div class="buttons">
-          <button class="edit-profile">Edit Profile</button>
+          <button class="edit-profile">Follow</button>
           <button class="message">
             <i class="iconfont icon-message"></i>
           </button>
@@ -811,9 +593,6 @@
             </li>
             <li>
               <i class="iconfont icon-t-box-line"></i>
-            </li>
-            <li>
-              <i class="iconfont icon-drafts"></i>
             </li>
           </ul>
         </div>
@@ -1289,11 +1068,13 @@
     <div class="bottom-top-bar">
       <ul>
         <li><i class="iconfont icon-home"></i></li>
-        <li><i class="iconfont icon-following"></i></li>
+        <li><i class="iconfont icon-following follow-btn"></i></li>
         <li><i class="iconfont icon-add"></i></li>
         <li><i class="iconfont icon-message"></i></li>
         <li><i class="iconfont icon-user"></i></li>
       </ul>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>

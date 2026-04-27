@@ -98,7 +98,7 @@ textarea::placeholder {
   width: 100%;
   padding: 2.13vw;
   background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(5.13vw);
   border: 0.27vw solid rgba(255, 255, 255, 0.45);
   box-shadow:
     0 2vw 5vw rgba(0, 0, 0, 0.08),

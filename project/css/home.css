@@ -2,11 +2,11 @@
 }
 .bottom-top-bar {
   position: fixed;
-  bottom: 0;
+  bottom: -1.2vw;
   left: 0;
   width: 100%;
   height: 15vw;
-  padding: 2.13vw 6.6vw;
+  padding: 4.26vw 6.6vw;
   margin-top: 2.13vw;
   background: #ffffff;
   z-index: 1;
@@ -23,6 +23,7 @@
 }
 .home {
   width: 100%;
+  padding-bottom: 16vw;
 }
 .nav-bar {
   width: 100%;
@@ -60,7 +61,7 @@
   height: 1vw;
   background: #000000;
   border-radius: 0.5vw;
-  transition: 0.3s;
+  transition: 0.4s;
   transform: translateX(5.5vw);
 }
 .follow-user {
@@ -69,7 +70,7 @@
 }
 .follow-user ul {
   width: 100%;
-  height: 105px;
+  height: 26.92vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -186,7 +187,7 @@
   width: 100%;
   padding: 2.13vw;
   background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(5.13vw);
   border: 0.27vw solid rgba(255, 255, 255, 0.45);
   box-shadow:
     0 2vw 5vw rgba(0, 0, 0, 0.08),
@@ -237,7 +238,7 @@
   color: rgba(0, 0, 0, 0.4);
 }
 .description {
-  font-size: 2.4vw;
+  font-size: 3.4vw;
 }
 .description p {
   margin: 2.13vw 0;
@@ -274,7 +275,7 @@
   width: 100%;
   padding: 2.13vw;
   background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(5.13vw);
   border: 0.27vw solid rgba(255, 255, 255, 0.45);
   box-shadow:
     0 2vw 5vw rgba(0, 0, 0, 0.08),
@@ -323,4 +324,15 @@
 .search-bar i {
   font-size: 6.6vw;
   color: #ffffff;
+}
+.bottom-top-bar li i.active-tab {
+  color: #000000;
+}
+.mode-active {
+  display: block !important;
+}
+.ForYou,
+.Follow,
+.Topic {
+  display: none;
 }
