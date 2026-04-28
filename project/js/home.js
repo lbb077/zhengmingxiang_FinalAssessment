@@ -162,7 +162,6 @@ function renderPosts(postsData) {
               </li>
       `;
     }
-    console.log(userName);
     if (index % 2 === 0) {
       leftPostList.innerHTML += html;
     } else {
@@ -171,7 +170,7 @@ function renderPosts(postsData) {
   });
 }
 
-function getForYouPosts() {
+export function getForYouPosts() {
   const token = localStorage.getItem("token");
 
   request(
@@ -191,7 +190,15 @@ function getForYouPosts() {
       }
 
       const list = result.data;
-      const userRequests = list.map((post) => {
+      const publicPosts = [];
+
+      list.forEach((post) => {
+        if (post.permission === 1) {
+          publicPosts.push(post);
+        }
+      });
+
+      const userRequests = publicPosts.map((post) => {
         return request(
           `/user/getDetail/${post.userId}`,
           "POST",
@@ -217,6 +224,14 @@ function getForYouPosts() {
 }
 
 getForYouPosts();
+
+window.addEventListener("hashchange", () => {
+  const pageName = window.location.hash.split("?")[0];
+
+  if (pageName === "#home") {
+    getForYouPosts();
+  }
+});
 
 export function getFollowData() {
   const token = localStorage.getItem("token");

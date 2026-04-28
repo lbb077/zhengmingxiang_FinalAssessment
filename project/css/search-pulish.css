@@ -34,6 +34,14 @@
   height: 16vw;
   border-radius: 50%;
 }
+textarea {
+  width: 100%;
+  min-height: 80vw;
+}
+.pulish-footer {
+  position: fixed;
+  bottom: 15vw;
+}
 .pulish-footer .fn-btns {
   display: flex;
   gap: 2.13vw;
@@ -49,9 +57,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24vw;
-  height: 24vw;
-  margin: 2.13vw 0;
+  width: 30vw;
+  height: 30vw;
   border-radius: 6vw;
   border: 0.5vw solid rgba(0, 0, 0, 0.8);
 }
@@ -189,4 +196,57 @@ textarea::placeholder {
   border-radius: 3vw;
   background: #9a9a9a;
   color: #ffffff;
+}
+.push-img {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.13vw;
+  padding-bottom: 2.13vw;
+}
+.del-img {
+  position: absolute;
+  top: 1vw;
+  right: 1vw;
+  background: #ffffff;
+}
+.photo-item {
+  position: relative;
+}
+.photo-item img {
+  width: 30vw;
+  height: 30vw;
+}
+.define {
+  display: flex;
+  flex-direction: column;
+  gap: 2.13vw;
+  padding: 2.13vw;
+}
+.define li {
+  padding: 2.13vw 0;
+  border-bottom: 0.078vw solid #efefef;
+}
+.define li input::placeholder {
+  font-size: 4.26vw;
+  color: rgba(0, 0, 0, 0.7);
+}
+.choose-permission {
+  display: flex;
+  justify-content: space-between;
+  gap: 2.13vw;
+}
+.choose-permission button {
+  padding: 2.13vw 3.14vw;
+  color: #000000;
+  border: 0.78vw solid #efefef;
+  border-radius: 3vw;
+  transition: all 0.3s ease;
+}
+.mode-picked {
+  background: #000000;
+  color: #ffffff !important;
+}
+.choose-permission .picked {
+  background: #000000;
+  color: #ffffff !important;
 }
