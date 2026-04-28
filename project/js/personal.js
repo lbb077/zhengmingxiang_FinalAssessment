@@ -1,20 +1,20 @@
-import { getElement, getElements, addEvent } from "./utils.js";
+﻿import { getElement, getElements, addEvent } from "./utils.js";
 import request from "./request.js";
 
 const editProfileBtn = getElement(".edit-profile");
 const messageBtn = getElement(".userName-and-info .message");
-const avatarImg = getElement(".Avater .border img");
-const usernameEl = getElement(".username");
-const signatureEl = getElement(".desc");
-const postsEl = getElement(".posts");
-const followersEl = getElement(".followers");
-const followingEl = getElement(".following");
+const avatarImg = getElement(".personal .Avater .border img");
+const usernameEl = getElement(".personal .username");
+const signatureEl = getElement(".personal .desc");
+const postsEl = getElement(".personal .posts");
+const followersEl = getElement(".personal .followers");
+const followingEl = getElement(".personal .following");
 const postsView = getElement(".posts-view");
 const draftView = getElement(".draft-view");
 const personalPostsList = getElement(".posts-view ul");
 const draftList = getElement(".draft-list");
 const tabItems = getElements(".personal .tab-navi-bar li");
-const defaultAvatar = "./resources/test photos/test-user-img.jpg";
+const defaultAvatar = "./resources/test-photos/test-user-img.jpg";
 let currentPosts = [];
 
 addEvent(editProfileBtn, "click", () => {
@@ -347,3 +347,4 @@ window.addEventListener("hashchange", () => {
 });
 
 loadPersonalPage();
+

@@ -8,7 +8,6 @@ const leftPostList = getElement(".left-post-list");
 const rightPostList = getElement(".right-post-list");
 const followUserList = getElement(".follow .follow-user ul");
 const followPostList = getElement(".follow .follow-post ul");
-const defaultAvatar = "./resources/test photos/test-user-img.jpg";
 const modeBtn = getElements(".mode-toggle button");
 
 addEvent(searchBar, "click", () => {
@@ -80,13 +79,18 @@ function renderPosts(postsData) {
   postsData.forEach((post, index) => {
     let html = "";
     const image = getPostImage(post);
-    const avatar = defaultAvatar;
+    const avatar = post.userImage;
     const userName = post.userName;
     const time = post.createTime;
     const content = post.content;
     const likes = post.likeCount;
     const comments = post.commentCount;
     const postId = post.postId;
+    let avatarSrc = "";
+
+    if (avatar !== "" && avatar !== null && avatar !== undefined) {
+      avatarSrc = `src="${avatar}"`;
+    }
 
     if (image) {
       html = `
@@ -97,7 +101,7 @@ function renderPosts(postsData) {
                       <div class="avater">
                         <div class="avater-img">
                           <img
-                            src="${avatar}"
+                            ${avatarSrc}
                             alt=""
                           />
                         </div>
@@ -135,7 +139,7 @@ function renderPosts(postsData) {
                       <div class="avater">
                         <div class="avater-img">
                           <img
-                            src="${avatar}"
+                            ${avatarSrc}
                             alt=""
                           />
                         </div>
@@ -210,6 +214,7 @@ export function getForYouPosts() {
           return {
             ...post,
             userName: user.userName,
+            userImage: user.image,
           };
         });
       });
@@ -308,12 +313,13 @@ export function getFollowData() {
             const posts = postGroups[index];
 
             posts.forEach((post) => {
-              followPosts.push({
-                ...post,
-                userId: followIds[index],
-                userName: user.userName,
-              });
+            followPosts.push({
+              ...post,
+              userId: followIds[index],
+              userName: user.userName,
+              userImage: user.image,
             });
+          });
           });
 
           renderFollowUsers(followUsers);
@@ -337,13 +343,18 @@ export function renderFollowUsers(users) {
   users.forEach((user) => {
     const userId = user.userId;
     const userName = user.userName;
-    const avatar = defaultAvatar;
+    const avatar = user.image;
+    let avatarSrc = "";
+
+    if (avatar !== "" && avatar !== null && avatar !== undefined) {
+      avatarSrc = `src="${avatar}"`;
+    }
 
     followUserList.innerHTML += `
       <li data-user-id="${userId}">
         <div class="bg-circle">
           <div class="border">
-            <img src="${avatar}" alt="#" />
+            <img ${avatarSrc} alt="#" />
           </div>
         </div>
         <div class="user-name">${userName}</div>
@@ -364,11 +375,16 @@ export function renderFollowPosts(posts) {
     const postId = post.postId;
     const userId = post.userId;
     const userName = post.userName;
-    const avatar = defaultAvatar;
+    const avatar = post.userImage;
     const image = getPostImage(post);
     const content = post.content;
     const likes = post.likeCount;
     const comments = post.commentCount;
+    let avatarSrc = "";
+
+    if (avatar !== "" && avatar !== null && avatar !== undefined) {
+      avatarSrc = `src="${avatar}"`;
+    }
 
     followPostList.innerHTML += `
       <li data-id="${postId}">
@@ -376,7 +392,7 @@ export function renderFollowPosts(posts) {
           <div class="avater-info" data-user-id="${userId}">
             <div class="bg-circle">
               <div class="border">
-                <img src="${avatar}" alt="#" />
+                <img ${avatarSrc} alt="#" />
               </div>
             </div>
             <div class="poster-name">${userName}</div>

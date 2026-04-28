@@ -7,6 +7,7 @@ import "./home.js";
 import "./post-detials.js";
 import "./publish.js";
 import "./personal.js";
+import "./other.js";
 // hash变化函数 绑定事件
 window.addEventListener("hashchange", router);
 window.addEventListener("load", router);

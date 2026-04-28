@@ -22,11 +22,33 @@
   line-height: 2.5vw;
   letter-spacing: 0.2vw;
 }
+.profile-head {
+  position: relative;
+  overflow: hidden;
+}
+.profile-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 38vw;
+  object-fit: contain;
+  object-position: center;
+}
+.profile-content {
+  position: relative;
+  z-index: 1;
+}
 .user-proflie-data {
   display: flex;
   align-items: center;
-  gap: 16vw;
   padding: 2.13vw;
+}
+.personal .profile-head .user-proflie-data {
+  align-items: flex-end;
+  min-height: 34vw;
 }
 .Avater .bg-circle {
   width: 24vw;
@@ -41,20 +63,6 @@
   width: 20.5vw;
   height: 20.5vw;
 }
-.data ul {
-  display: flex;
-  gap: 4.26vw;
-  padding: 1vw 0;
-  font-size: 4.26vw;
-}
-.data ul:nth-child(1) {
-  font-weight: 600;
-  font-size: 6vw;
-  gap: 16.6vw;
-}
-.data ul:nth-child(2) {
-  gap: 2.13vw;
-}
 .userName-and-info {
   padding: 2.13vw;
   font-size: 4.26vw;
@@ -62,6 +70,34 @@
 .userName-and-info .username {
   font-weight: 600;
   font-size: 6vw;
+  padding-top: 2.13vw;
+}
+.userName-and-info .data {
+  margin: 2.5vw 0;
+  padding: 2.8vw 3vw;
+  background: #f7f7f7;
+  border-radius: 2.5vw;
+  box-shadow: 0 0.5vw 2vw rgba(0, 0, 0, 0.04);
+}
+.userName-and-info .data ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.userName-and-info .data li {
+  flex: 1;
+  text-align: center;
+}
+.userName-and-info .data span {
+  display: block;
+  font-size: 5vw;
+  font-weight: 600;
+  color: #000000;
+}
+.userName-and-info .data p {
+  margin-top: 1vw;
+  font-size: 3.3vw;
+  color: rgba(0, 0, 0, 0.55);
 }
 .userName-and-info .desc {
   color: rgba(0, 0, 0, 0.7);

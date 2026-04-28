@@ -1,7 +1,7 @@
-import { getElement } from "./utils.js";
+﻿import { getElement } from "./utils.js";
 import request from "./request.js";
 
-const defaultAvatar = "./resources/test photos/test-user-img.jpg";
+const defaultAvatar = "./resources/test-photos/test-user-img.jpg";
 
 const api = {
   detail: (postId) => `/post/${postId}`,
@@ -444,3 +444,4 @@ function renderPostDetail() {
 }
 
 export { renderPostDetail };
+
