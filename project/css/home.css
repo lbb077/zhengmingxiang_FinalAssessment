@@ -274,15 +274,41 @@
 .topic .item {
   width: 100%;
   padding: 2.13vw;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(5.13vw);
-  border: 0.27vw solid rgba(255, 255, 255, 0.45);
-  box-shadow:
-    0 2vw 5vw rgba(0, 0, 0, 0.08),
-    inset 0 0.27vw 0 rgba(255, 255, 255, 0.6);
+  background: #ffffff;
+  border: 0.27vw solid #eeeeee;
+  border-radius: 2vw;
+  box-shadow: 0 0.8vw 2vw rgba(0, 0, 0, 0.04);
 }
 .topic .item .photo {
   width: 100%;
+}
+.Topic .topic-list {
+  padding: 2.13vw;
+}
+.Topic .topic-list ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.13vw;
+}
+.Topic .topic-list li {
+  width: 100%;
+}
+.Topic .topic-list .topic-btn {
+  width: 100%;
+  min-height: 10vw;
+  padding: 0 2vw;
+  border: 0.27vw solid rgba(255, 255, 255, 0.5);
+  border-radius: 5vw;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  font-size: 3.6vw;
+  font-weight: 500;
+  color: #333333;
+}
+.Topic .topic-list .topic-btn.picked {
+  background: #000000;
+  color: #ffffff !important;
 }
 .item-number {
   padding: 2.13vw;

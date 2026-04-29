@@ -50,6 +50,10 @@
   align-items: flex-end;
   min-height: 34vw;
 }
+.other .profile-head .user-proflie-data {
+  align-items: flex-end;
+  min-height: 34vw;
+}
 .Avater .bg-circle {
   width: 24vw;
   height: 24vw;
@@ -102,42 +106,6 @@
 .userName-and-info .desc {
   color: rgba(0, 0, 0, 0.7);
 }
-.follower-desc span:nth-child(1) {
-  color: rgba(0, 0, 0, 0.7);
-}
-.follower-desc span:nth-child(2) {
-  color: #000000;
-  font-size: 500;
-}
-.avaters {
-  display: flex;
-  position: relative;
-}
-.avaters .border {
-  width: 12vw;
-  height: 12vw;
-  border-radius: 50%;
-  overflow: hidden;
-}
-.avaters .border img {
-  width: 11vw;
-  height: 11vw;
-  border-radius: 50%;
-  object-fit: cover;
-  overflow: hidden;
-}
-.avaters .border:nth-child(2) {
-  transform: translateX(-5vw);
-}
-.avaters .border:nth-child(3) {
-  position: absolute;
-  transform: translateX(14vw);
-}
-.profile-follower {
-  display: flex;
-  gap: 4.26vw;
-  padding: 2.13vw 0;
-}
 .buttons {
   display: grid;
   grid-template-columns: 1fr 10.8vw;
@@ -178,6 +146,11 @@
 .icons i {
   font-size: 6.6vw;
   color: #000000;
+}
+.personal .navi-bar .icon-settings {
+  display: inline-block;
+  transform: scale(1.4);
+  transform-origin: center;
 }
 
 .post-item {
@@ -263,10 +236,7 @@
   font-size: 6.6vw;
   font-weight: 500;
 }
-.other .tab-navi-bar ul {
-  grid-template-columns: repeat(2, 1fr);
-}
-.other .edit-profile {
+.other .follow-btn {
   background: #000000;
   color: #ffffff;
 }

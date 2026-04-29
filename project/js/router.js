@@ -1,9 +1,9 @@
-import { getElement, getElements } from "./utils.js";
+﻿import { getElement, getElements } from "./utils.js";
 import { switchHomeMode } from "./home.js";
 import { renderPostDetail } from "./post-detials.js";
 
 const pages = getElements(
-  ".sign-in, .home, .post-detials, .personal, .other, .message-page, .chat-page, .pulish-page, .search-page, .search-result-page",
+  ".sign-in, .home, .post-detials, .personal, .other, .message-page, .chat-page, .pulish-page, .search-page, .search-result-page, .settings-page",
 );
 
 function hideAllPages() {
@@ -34,6 +34,7 @@ function router() {
     "#chat",
     "#publish",
     "#search-result",
+    "#settings",
   ];
   if (!token && userPage.includes(hashPage.split("?")[0])) {
     location.hash = "#login";
@@ -67,9 +68,6 @@ function router() {
       getElement(".search-page").style.display = "block";
       break;
 
-    // case "#post-detials":
-    //   getElement(".post-detials").style.display = "block";
-    //   break;
 
     case "#personal":
       getElement(".personal").style.display = "block";
@@ -93,6 +91,10 @@ function router() {
 
     case "#search-result":
       getElement(".search-result-page").style.display = "block";
+      break;
+
+    case "#settings":
+      getElement(".settings-page").style.display = "block";
       break;
   }
   toggleBottomBar(pageName);

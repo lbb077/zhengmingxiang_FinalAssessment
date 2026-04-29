@@ -1,13 +1,18 @@
-import { getElement, getElements, addEvent } from "./utils.js";
+﻿import { getElement, getElements, addEvent } from "./utils.js";
 import request from "./request.js";
 
-//获取dom元素
 const searchBar = getElement(".home .search-bar");
 const forYou = getElement(".ForYou");
 const leftPostList = getElement(".left-post-list");
 const rightPostList = getElement(".right-post-list");
 const followUserList = getElement(".follow .follow-user ul");
 const followPostList = getElement(".follow .follow-post ul");
+const topicList = getElement(".topic-list ul");
+const topicCount = getElement(".topic-count");
+const topicLeftPostList = getElement(".topic-left-post-list");
+const topicRightPostList = getElement(".topic-right-post-list");
+const topicPostBox = getElement(".Topic .topic");
+const modeToggle = getElement(".mode-toggle");
 const modeBtn = getElements(".mode-toggle button");
 
 addEvent(searchBar, "click", () => {
@@ -33,13 +38,25 @@ export function switchHomeMode(index) {
     `translateX(${indicatorLeft[index]})`;
 
   if (index === 1) {
-    getFollowData(); //如果页面在关注，就渲染关注页面的数据
+    getFollowData();
+  }
+
+  if (index === 2) {
+    getTopicButtons();
   }
 }
 
-modeBtn.forEach((item, index) => {
-  addEvent(item, "click", () => {
-    switchHomeMode(index);
+addEvent(modeToggle, "click", (event) => {
+  const button = event.target.closest("button");
+
+  if (!button) {
+    return;
+  }
+
+  modeBtn.forEach((item, index) => {
+    if (item === button) {
+      switchHomeMode(index);
+    }
   });
 });
 
@@ -49,6 +66,17 @@ function getPostImage(post) {
   }
 
   return post.images.split(",")[0];
+}
+
+function goUserPage(userId) {
+  const myUserId = localStorage.getItem("userId");
+
+  if (userId === myUserId) {
+    window.location.hash = "#personal";
+    return;
+  }
+
+  window.location.hash = `#other?id=${userId}`;
 }
 
 function bindForYouEvents() {
@@ -63,7 +91,7 @@ function bindForYouEvents() {
 
     if (avatar) {
       const userId = item.dataset.userId;
-      window.location.hash = `#other?id=${userId}`;
+      goUserPage(userId);
       return;
     }
 
@@ -174,6 +202,279 @@ function renderPosts(postsData) {
   });
 }
 
+function getUserAvatar(user) {
+  let avatar = "";
+
+  if (user.image !== "") {
+    if (user.image !== null) {
+      if (user.image !== undefined) {
+        avatar = user.image;
+      }
+    }
+  }
+
+  return avatar;
+}
+
+function getPostWithUser(post, token) {
+  return request(
+    `/user/getDetail/${post.userId}`,
+    "POST",
+    {},
+    { Authorization: token },
+  ).then((userRes) => {
+    const user = userRes.data.data;
+
+    return {
+      ...post,
+      userName: user.userName,
+      userImage: getUserAvatar(user),
+    };
+  });
+}
+
+function getTopicButtons() {
+  const token = localStorage.getItem("token");
+
+  request(
+    "/post/all",
+    "GET",
+    {},
+    {
+      Authorization: token,
+    },
+  )
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Get topics failed:", result.msg);
+        return;
+      }
+
+      const posts = result.data;
+      const topics = [];
+
+      posts.forEach((post) => {
+        if (post.permission !== 1) {
+          return;
+        }
+
+        if (post.topic === "") {
+          return;
+        }
+
+        if (!topics.includes(post.topic)) {
+          topics.push(post.topic);
+        }
+      });
+
+      renderTopicButtons(topics);
+    })
+    .catch((error) => {
+      console.log("Request topics failed:", error);
+    });
+}
+
+function renderTopicButtons(topics) {
+  topicList.innerHTML = "";
+  topicLeftPostList.innerHTML = "";
+  topicRightPostList.innerHTML = "";
+
+  if (topics.length === 0) {
+    topicCount.textContent = "No topics yet";
+    return;
+  }
+
+  topics.forEach((topic, index) => {
+    let pickedClass = "";
+
+    if (index === 0) {
+      pickedClass = "picked";
+    }
+
+    topicList.innerHTML += `
+      <li>
+        <button class="topic-btn ${pickedClass}" type="button" data-topic="${topic}">
+          ${topic}
+        </button>
+      </li>
+    `;
+  });
+
+  getTopicPosts(topics[0]);
+}
+
+function getTopicPosts(topic) {
+  const token = localStorage.getItem("token");
+
+  topicCount.textContent = `Loading ${topic} posts...`;
+  topicLeftPostList.innerHTML = "";
+  topicRightPostList.innerHTML = "";
+
+  request(
+    "/post/topic",
+    "GET",
+    {
+      topic: topic,
+    },
+    {
+      Authorization: token,
+    },
+  )
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Get topic posts failed:", result.msg);
+        return;
+      }
+
+      const posts = result.data;
+      const publicPosts = [];
+
+      posts.forEach((post) => {
+        if (post.permission === 1) {
+          publicPosts.push(post);
+        }
+      });
+
+      if (publicPosts.length === 0) {
+        topicCount.textContent = "No posts in this topic";
+        return;
+      }
+
+      const userRequests = publicPosts.map((post) => {
+        return getTopicPostWithUser(post, token);
+      });
+
+      Promise.all(userRequests).then((newPosts) => {
+        topicCount.textContent = `${newPosts.length} posts in ${topic}`;
+        renderTopicPosts(newPosts);
+      });
+    })
+    .catch((error) => {
+      console.log("Request topic posts failed:", error);
+    });
+}
+
+function getTopicPostWithUser(post, token) {
+  return request(
+    `/user/getDetail/${post.userId}`,
+    "POST",
+    {},
+    { Authorization: token },
+  ).then((userRes) => {
+    const user = userRes.data.data;
+    let avatar = "";
+
+    if (user.image !== "") {
+      if (user.image !== null) {
+        if (user.image !== undefined) {
+          avatar = user.image;
+        }
+      }
+    }
+
+    return {
+      ...post,
+      userName: user.userName,
+      userImage: avatar,
+    };
+  });
+}
+
+function renderTopicPosts(posts) {
+  topicLeftPostList.innerHTML = "";
+  topicRightPostList.innerHTML = "";
+
+  posts.forEach((post, index) => {
+    let html = "";
+    const image = getPostImage(post);
+    const avatar = post.userImage;
+    const userName = post.userName;
+    const time = post.createTime;
+    const content = post.content;
+    const likes = post.likeCount;
+    const comments = post.commentCount;
+    const postId = post.postId;
+    let avatarSrc = "";
+
+    if (avatar !== "" && avatar !== null && avatar !== undefined) {
+      avatarSrc = `src="${avatar}"`;
+    }
+
+    if (image !== "") {
+      html = `
+        <li class="item" data-id="${postId}" data-user-id="${post.userId}">
+          <div class="photo">
+            <div class="post">
+              <div class="post-head">
+                <div class="avater">
+                  <div class="avater-img">
+                    <img ${avatarSrc} alt="" />
+                  </div>
+                  <div class="avater-infos">
+                    <p class="avater-id">${userName}</p>
+                    <p class="time">${time}</p>
+                  </div>
+                </div>
+                <i class="iconfont icon-a-gf-dots1"></i>
+              </div>
+              <img src="${image}" alt="" class="image" />
+              <div class="description">
+                <p>${content}</p>
+                <div class="post-action">
+                  <i class="iconfont icon-24px"></i>
+                  <span>${likes} Likes</span>
+                  <i class="iconfont icon-pinglun"></i>
+                  <span>${comments} comments</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      `;
+    } else {
+      html = `
+        <li class="item" data-id="${postId}" data-user-id="${post.userId}">
+          <div class="only-text">
+            <div class="post">
+              <div class="post-head">
+                <div class="avater">
+                  <div class="avater-img">
+                    <img ${avatarSrc} alt="" />
+                  </div>
+                  <div class="avater-infos">
+                    <p class="avater-id">${userName}</p>
+                    <p class="time">${time}</p>
+                  </div>
+                </div>
+                <i class="iconfont icon-a-gf-dots1"></i>
+              </div>
+              <p class="post-content">${content}</p>
+              <div class="description">
+                <div class="post-action">
+                  <i class="iconfont icon-24px"></i>
+                  <span>${likes} Likes</span>
+                  <i class="iconfont icon-pinglun"></i>
+                  <span>${comments} comments</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      `;
+    }
+
+    if (index % 2 === 0) {
+      topicLeftPostList.innerHTML += html;
+    } else {
+      topicRightPostList.innerHTML += html;
+    }
+  });
+}
+
 export function getForYouPosts() {
   const token = localStorage.getItem("token");
 
@@ -203,20 +504,7 @@ export function getForYouPosts() {
       });
 
       const userRequests = publicPosts.map((post) => {
-        return request(
-          `/user/getDetail/${post.userId}`,
-          "POST",
-          {},
-          { Authorization: token },
-        ).then((userRes) => {
-          const user = userRes.data.data;
-
-          return {
-            ...post,
-            userName: user.userName,
-            userImage: user.image,
-          };
-        });
+        return getPostWithUser(post, token);
       });
 
       Promise.all(userRequests).then((newList) => {
@@ -442,7 +730,7 @@ export function bindFollowEvents() {
       return;
     }
 
-    window.location.hash = `#other?id=${userId}`;
+    goUserPage(userId);
   });
 
   addEvent(followPostList, "click", (event) => {
@@ -450,7 +738,7 @@ export function bindFollowEvents() {
 
     if (avatarInfo) {
       const userId = avatarInfo.dataset.userId;
-      window.location.hash = `#other?id=${userId}`;
+      goUserPage(userId);
       return;
     }
 
@@ -470,5 +758,52 @@ export function bindFollowEvents() {
   });
 }
 
+function bindTopicEvents() {
+  addEvent(topicList, "click", (event) => {
+    const button = event.target.closest(".topic-btn");
+
+    if (!button) {
+      return;
+    }
+
+    const buttons = getElements(".topic-list .topic-btn");
+
+    buttons.forEach((item) => {
+      item.classList.remove("picked");
+    });
+
+    button.classList.add("picked");
+
+    const topic = button.dataset.topic;
+
+    getTopicPosts(topic);
+  });
+
+  addEvent(topicPostBox, "click", (event) => {
+    const item = event.target.closest(".item");
+
+    if (!item) {
+      return;
+    }
+
+    const avatar = event.target.closest(".avater-img");
+
+    if (avatar) {
+      const userId = item.dataset.userId;
+      goUserPage(userId);
+      return;
+    }
+
+    const postId = item.dataset.id;
+
+    if (!postId) {
+      return;
+    }
+
+    window.location.hash = `#post-detials?id=${postId}`;
+  });
+}
+
 bindForYouEvents();
 bindFollowEvents();
+bindTopicEvents();

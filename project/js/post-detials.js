@@ -1,8 +1,6 @@
 ﻿import { getElement } from "./utils.js";
 import request from "./request.js";
 
-const defaultAvatar = "./resources/test-photos/test-user-img.jpg";
-
 const api = {
   detail: (postId) => `/post/${postId}`,
   comments: (postId) => `/comment/list/${postId}`,
@@ -55,7 +53,7 @@ export function getPostIdFromHash() {
 }
 
 export function getImages(post) {
-  if (post.images === "") {
+  if (post.images === "" || post.images === null || post.images === undefined) {
     return [];
   }
 
@@ -65,8 +63,8 @@ export function getImages(post) {
 function showDetailError(message) {
   currentDetailPost = null;
   posterName.textContent = "";
-  authorAvatar.src = defaultAvatar;
-  commentAvatar.src = defaultAvatar;
+  authorAvatar.src = "";
+  commentAvatar.src = "";
   likeCount.textContent = "";
   contentText.textContent = message;
   photoList.innerHTML = "";
@@ -77,8 +75,8 @@ function showDetailError(message) {
 function clearDetailPage() {
   currentDetailPost = null;
   posterName.textContent = "";
-  authorAvatar.src = defaultAvatar;
-  commentAvatar.src = defaultAvatar;
+  authorAvatar.src = "";
+  commentAvatar.src = "";
   likeCount.textContent = "";
   contentText.textContent = "";
   photoList.innerHTML = "";
@@ -90,6 +88,7 @@ function clearDetailPage() {
   collectButton.classList.remove("active");
   collectIcon.classList.remove("active");
   followButton.textContent = "follow";
+  followButton.style.display = "block";
 }
 
 function updateLikeButton() {
@@ -121,6 +120,16 @@ function updateCollectButton() {
 function updateFollowButton() {
   if (!currentDetailPost) return;
 
+  const myUserId = localStorage.getItem("userId");
+  const postUserId = String(currentDetailPost.userId);
+
+  if (postUserId === myUserId) {
+    followButton.style.display = "none";
+    return;
+  }
+
+  followButton.style.display = "block";
+
   if (currentDetailPost.isFollowing) {
     followButton.textContent = "following";
   } else {
@@ -128,10 +137,62 @@ function updateFollowButton() {
   }
 }
 
+function renderAuthorAvatar(userId) {
+  const token = localStorage.getItem("token");
+
+  request(`/user/getDetail/${userId}`, "POST", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Get author info failed:", result.msg);
+        return;
+      }
+
+      const user = result.data;
+
+      if (user.image === "" || user.image === null || user.image === undefined) {
+        authorAvatar.src = "";
+        return;
+      }
+
+      authorAvatar.src = user.image;
+    })
+    .catch((error) => {
+      console.log("Get author info error:", error);
+    });
+}
+
+function renderMyAvatar() {
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+
+  request(`/user/getDetail/${userId}`, "POST", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Get my info failed:", result.msg);
+        return;
+      }
+
+      const user = result.data;
+
+      if (user.image === "" || user.image === null || user.image === undefined) {
+        commentAvatar.src = "";
+        return;
+      }
+
+      commentAvatar.src = user.image;
+    })
+    .catch((error) => {
+      console.log("Get my info error:", error);
+    });
+}
+
 export function renderDetail(post) {
   const postId = post.postId;
   const userId = post.userId;
-  const avatar = defaultAvatar;
   const userName = post.userName;
   const content = post.content;
   const likeCountValue = post.likeCount;
@@ -140,7 +201,6 @@ export function renderDetail(post) {
   currentDetailPost = {
     postId: postId,
     userId: userId,
-    avatar: avatar,
     userName: userName,
     content: content,
     likeCount: likeCountValue,
@@ -149,8 +209,8 @@ export function renderDetail(post) {
     isFollowing: false,
   };
 
-  authorAvatar.src = avatar;
-  commentAvatar.src = avatar;
+  authorAvatar.src = "";
+  commentAvatar.src = "";
   posterName.textContent = userName;
   contentText.textContent = content;
 
@@ -176,6 +236,8 @@ export function renderDetail(post) {
   updateLikeButton();
   updateCollectButton();
   updateFollowButton();
+  renderAuthorAvatar(userId);
+  renderMyAvatar();
 }
 
 export function renderCommentList(comments) {
@@ -188,15 +250,23 @@ export function renderCommentList(comments) {
   let html = "";
 
   comments.forEach((comment) => {
-    const avatar = defaultAvatar;
     const userName = comment.userName;
+    let userImage = "";
     const content = comment.content;
     const time = comment.createTime;
+
+    if (
+      comment.userImage !== "" &&
+      comment.userImage !== null &&
+      comment.userImage !== undefined
+    ) {
+      userImage = comment.userImage;
+    }
 
     html += `
       <div class="comment-item">
         <div class="commenter">
-          <img src="${avatar}" alt="#" class="detial-avater" />
+          <img src="${userImage}" alt="#" class="detial-avater" />
         </div>
         <div class="comment-info">
           <p class="commenter-id">${userName}</p>
@@ -352,6 +422,13 @@ export function toggleFollow() {
 
   if (!currentDetailPost.userId) return;
 
+  const myUserId = localStorage.getItem("userId");
+  const postUserId = String(currentDetailPost.userId);
+
+  if (postUserId === myUserId) {
+    return;
+  }
+
   const token = localStorage.getItem("token");
   let url = api.follow(currentDetailPost.userId);
 
@@ -429,6 +506,14 @@ export function bindDetailEvents() {
 
     if (!currentDetailPost.userId) return;
 
+    const myUserId = localStorage.getItem("userId");
+    const userId = String(currentDetailPost.userId);
+
+    if (userId === myUserId) {
+      window.location.hash = "#personal";
+      return;
+    }
+
     window.location.hash = `#other?id=${currentDetailPost.userId}`;
   };
 
@@ -444,4 +529,5 @@ function renderPostDetail() {
 }
 
 export { renderPostDetail };
+
 

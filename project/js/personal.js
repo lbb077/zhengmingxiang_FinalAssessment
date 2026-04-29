@@ -3,7 +3,10 @@ import request from "./request.js";
 
 const editProfileBtn = getElement(".edit-profile");
 const messageBtn = getElement(".userName-and-info .message");
+const settingBtn = getElement(".personal .icon-settings");
+const navUserImg = getElement(".personal .User img");
 const avatarImg = getElement(".personal .Avater .border img");
+const backgroundImg = getElement(".personal .profile-bg-img");
 const usernameEl = getElement(".personal .username");
 const signatureEl = getElement(".personal .desc");
 const postsEl = getElement(".personal .posts");
@@ -14,7 +17,6 @@ const draftView = getElement(".draft-view");
 const personalPostsList = getElement(".posts-view ul");
 const draftList = getElement(".draft-list");
 const tabItems = getElements(".personal .tab-navi-bar li");
-const defaultAvatar = "./resources/test-photos/test-user-img.jpg";
 let currentPosts = [];
 
 addEvent(editProfileBtn, "click", () => {
@@ -28,7 +30,10 @@ addEvent(messageBtn, "click", () => {
   window.location.hash = "#message";
 });
 
-// 获取个人资料
+addEvent(settingBtn, "click", () => {
+  window.location.hash = "#settings";
+});
+
 function getUserInfo() {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
@@ -38,22 +43,42 @@ function getUserInfo() {
       if (res.data.code === 200) {
         const user = res.data.data;
 
-        avatarImg.src = defaultAvatar;
+        if (
+          user.image !== "" &&
+          user.image !== null &&
+          user.image !== undefined
+        ) {
+          avatarImg.src = user.image;
+          navUserImg.src = user.image;
+        } else {
+          avatarImg.src = "";
+          navUserImg.src = "";
+        }
+
+        if (
+          user.background !== "" &&
+          user.background !== null &&
+          user.background !== undefined
+        ) {
+          backgroundImg.src = user.background;
+        } else {
+          backgroundImg.src = "";
+        }
+
         usernameEl.textContent = user.userName;
         signatureEl.textContent = user.signature;
         postsEl.textContent = user.postCount;
         followersEl.textContent = user.followerCount;
         followingEl.textContent = user.followingCount;
       } else {
-        console.error("获取用户信息失败:", res.data.msg);
+        console.error("Get user info failed:", res.data.msg);
       }
     })
     .catch((err) => {
-      console.error("请求用户信息出错:", err);
+      console.error("Request user info failed:", err);
     });
 }
 
-// 获取自己的帖子
 function getUserPosts() {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
@@ -65,15 +90,14 @@ function getUserPosts() {
         currentPosts = posts;
         renderUserPosts(posts);
       } else {
-        console.error("获取个人帖子失败:", res.data.msg);
+        console.error("Get personal posts failed:", res.data.msg);
       }
     })
     .catch((err) => {
-      console.error("请求个人帖子出错:", err);
+      console.error("Request personal posts failed:", err);
     });
 }
 
-// 获取帖子第一张图片
 function getPostImage(post) {
   if (post.images === "") {
     return "";
@@ -82,7 +106,6 @@ function getPostImage(post) {
   return post.images.split(",")[0];
 }
 
-// 把权限数字转成页面上要显示的文字
 function getPermissionText(permission) {
   if (permission === 0) {
     return "draft";
@@ -103,7 +126,6 @@ function getPermissionText(permission) {
   return "unknown";
 }
 
-// 渲染自己的帖子列表
 function renderUserPosts(posts) {
   personalPostsList.innerHTML = "";
 
@@ -150,7 +172,6 @@ function renderUserPosts(posts) {
   });
 }
 
-// 根据 postId 找到当前点击的帖子
 function getPostById(postId) {
   let currentPost = null;
   const postIdNumber = Number(postId);
@@ -164,7 +185,6 @@ function getPostById(postId) {
   return currentPost;
 }
 
-// 删除自己的帖子
 function deletePost(postId) {
   const token = localStorage.getItem("token");
 
@@ -173,20 +193,19 @@ function deletePost(postId) {
       const result = res.data;
 
       if (result.code !== 200) {
-        console.log("删除帖子失败:", result.msg);
+        console.log("Delete post failed:", result.msg);
         return;
       }
 
-      console.log("删除帖子成功");
+      console.log("Delete post success");
       getUserInfo();
       getUserPosts();
     })
     .catch((err) => {
-      console.log("删除帖子请求出错:", err);
+      console.log("Delete post request failed:", err);
     });
 }
 
-// 读取本地草稿
 function getDraftPosts() {
   const draftText = localStorage.getItem("draftPosts");
 
@@ -197,7 +216,6 @@ function getDraftPosts() {
   return JSON.parse(draftText);
 }
 
-// 渲染草稿列表
 function renderDraftPosts() {
   const drafts = getDraftPosts();
 
@@ -227,7 +245,6 @@ function renderDraftPosts() {
   });
 }
 
-// 显示帖子列表
 function showPostsView() {
   postsView.style.display = "block";
   draftView.style.display = "none";
@@ -238,7 +255,6 @@ function showPostsView() {
   getUserPosts();
 }
 
-// 显示草稿列表
 function showDraftView() {
   postsView.style.display = "none";
   draftView.style.display = "block";
@@ -249,7 +265,6 @@ function showDraftView() {
   renderDraftPosts();
 }
 
-// 点击自己的帖子，进入详情页
 addEvent(personalPostsList, "click", (event) => {
   const item = event.target.closest("li");
 
@@ -289,7 +304,6 @@ addEvent(personalPostsList, "click", (event) => {
   window.location.hash = `#post-detials?id=${postId}`;
 });
 
-// 点击草稿按钮，先做本地编辑和删除
 addEvent(draftList, "click", (event) => {
   const editButton = event.target.closest(".draft-edit");
   const deleteButton = event.target.closest(".draft-delete");
@@ -323,7 +337,6 @@ addEvent(draftList, "click", (event) => {
   }
 });
 
-// 绑定个人页 tab
 addEvent(tabItems[0], "click", () => {
   showPostsView();
 });
@@ -332,7 +345,6 @@ addEvent(tabItems[1], "click", () => {
   showDraftView();
 });
 
-// 每次进入个人页，刷新个人资料和帖子列表
 function loadPersonalPage() {
   getUserInfo();
   showPostsView();
@@ -347,4 +359,5 @@ window.addEventListener("hashchange", () => {
 });
 
 loadPersonalPage();
+
 

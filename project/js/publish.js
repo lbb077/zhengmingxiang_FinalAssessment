@@ -5,7 +5,7 @@ import { getForYouPosts } from "./home.js";
 const titleInput = getElement("#pulish-title");
 const contentInput = getElement("#pulish-content");
 const imageInput = getElement("#pulish-image");
-const topicInput = getElement("#input-topic");
+const topicInput = getElement("#topic");
 const locationInput = getElement("#location");
 const publishButton = getElement("#pulish");
 const draftButton = getElement("#draft");
@@ -18,7 +18,6 @@ let currentPermission = 1;
 let editPostId = "";
 let editDraftId = "";
 
-// 渲染图片预览，预览地址只在本地显示
 function renderPreviewImages() {
   previewList.innerHTML = "";
 
@@ -47,7 +46,6 @@ function renderPreviewImages() {
   });
 }
 
-// 上传一张图片，成功后返回服务器图片地址
 function uploadOneImage(file) {
   const token = localStorage.getItem("token");
   const formData = new FormData();
@@ -60,7 +58,7 @@ function uploadOneImage(file) {
     const result = res.data;
 
     if (result.code !== 200) {
-      console.log("图片上传失败:", result.msg);
+      console.log("Image upload failed:", result.msg);
       return "";
     }
 
@@ -68,7 +66,24 @@ function uploadOneImage(file) {
   });
 }
 
-// 上传所有已选择图片，最后返回 images 字符串
+function getAllImageText(newImageText) {
+  const allImages = [];
+
+  oldImageUrls.forEach((url) => {
+    allImages.push(url);
+  });
+
+  if (newImageText !== "") {
+    const newImageUrls = newImageText.split(",");
+
+    newImageUrls.forEach((url) => {
+      allImages.push(url);
+    });
+  }
+
+  return allImages.join(",");
+}
+
 function uploadImages() {
   if (selectedFiles.length === 0) {
     return Promise.resolve(getAllImageText(""));
@@ -93,26 +108,6 @@ function uploadImages() {
   });
 }
 
-// 把旧图片和新图片拼成 images 字符串
-function getAllImageText(newImageText) {
-  const allImages = [];
-
-  oldImageUrls.forEach((url) => {
-    allImages.push(url);
-  });
-
-  if (newImageText !== "") {
-    const newImageUrls = newImageText.split(",");
-
-    newImageUrls.forEach((url) => {
-      allImages.push(url);
-    });
-  }
-
-  return allImages.join(",");
-}
-
-// 清空发布表单
 function clearPublishForm() {
   titleInput.value = "";
   contentInput.value = "";
@@ -129,7 +124,6 @@ function clearPublishForm() {
   localStorage.removeItem("editDraftId");
 }
 
-// 删除一个本地草稿
 function removeDraft(draftId) {
   const draftText = localStorage.getItem("draftPosts");
   const newDrafts = [];
@@ -150,7 +144,6 @@ function removeDraft(draftId) {
   localStorage.setItem("draftPosts", JSON.stringify(newDrafts));
 }
 
-// 保存草稿到 localStorage，不调用创建帖子接口
 function saveDraft() {
   const title = titleInput.value.trim();
   const content = contentInput.value.trim();
@@ -158,7 +151,7 @@ function saveDraft() {
   const location = locationInput.value.trim();
 
   if (content === "") {
-    console.log("草稿内容不能为空");
+    console.log("Draft content cannot be empty");
     return;
   }
 
@@ -190,13 +183,12 @@ function saveDraft() {
     drafts.unshift(draft);
     localStorage.setItem("draftPosts", JSON.stringify(drafts));
 
-    console.log("草稿保存成功", draft);
+    console.log("Draft saved", draft);
     clearPublishForm();
     window.location.hash = "#personal";
   });
 }
 
-// 创建帖子，permission 为 1/2/3 时才发布到后端
 function createPost(permission) {
   const token = localStorage.getItem("token");
   const title = titleInput.value.trim();
@@ -205,7 +197,7 @@ function createPost(permission) {
   const location = locationInput.value.trim();
 
   if (content === "") {
-    console.log("内容不能为空");
+    console.log("Content cannot be empty");
     return;
   }
 
@@ -220,7 +212,7 @@ function createPost(permission) {
   }
 
   if (permission !== 1 && permission !== 2 && permission !== 3) {
-    console.log("权限错误");
+    console.log("Permission error");
     return;
   }
 
@@ -244,11 +236,11 @@ function createPost(permission) {
         const result = res.data;
 
         if (result.code !== 200) {
-          console.log("创建失败:", result.msg);
+          console.log("Create failed:", result.msg);
           return;
         }
 
-        console.log("创建成功", result.data);
+        console.log("Create success", result.data);
 
         if (editDraftId !== "") {
           removeDraft(editDraftId);
@@ -259,12 +251,11 @@ function createPost(permission) {
         getForYouPosts();
       })
       .catch((error) => {
-        console.log("创建帖子请求失败:", error);
+        console.log("Create post request failed:", error);
       });
   });
 }
 
-// 更新正式帖子
 function updatePost(permission) {
   const token = localStorage.getItem("token");
   const title = titleInput.value.trim();
@@ -273,7 +264,7 @@ function updatePost(permission) {
   const location = locationInput.value.trim();
 
   if (content === "") {
-    console.log("内容不能为空");
+    console.log("Content cannot be empty");
     return;
   }
 
@@ -283,7 +274,7 @@ function updatePost(permission) {
     permission !== 2 &&
     permission !== 3
   ) {
-    console.log("权限错误");
+    console.log("Permission error");
     return;
   }
 
@@ -307,22 +298,21 @@ function updatePost(permission) {
         const result = res.data;
 
         if (result.code !== 0 && result.code !== 200) {
-          console.log("更新失败:", result.msg);
+          console.log("Update failed:", result.msg);
           return;
         }
 
-        console.log("更新成功", result.data);
+        console.log("Update success", result.data);
         clearPublishForm();
         window.location.hash = "#personal";
         getForYouPosts();
       })
       .catch((error) => {
-        console.log("更新帖子请求失败:", error);
+        console.log("Update post request failed:", error);
       });
   });
 }
 
-// 根据按钮 class 更新当前权限
 function changePermission(button) {
   permissionButtons.forEach((item) => {
     item.classList.remove("picked");
@@ -347,7 +337,6 @@ function changePermission(button) {
   }
 }
 
-// 根据 permission 设置按钮选中状态
 function setPermissionButton(permission) {
   permissionButtons.forEach((button) => {
     button.classList.remove("picked");
@@ -372,7 +361,6 @@ function setPermissionButton(permission) {
   });
 }
 
-// 回填旧图片
 function setOldImages(images) {
   oldImageUrls = [];
 
@@ -387,7 +375,6 @@ function setOldImages(images) {
   });
 }
 
-// 回填正式帖子
 function fillPostForm(post) {
   titleInput.value = post.title;
   contentInput.value = post.content;
@@ -399,7 +386,6 @@ function fillPostForm(post) {
   renderPreviewImages();
 }
 
-// 回填草稿
 function fillDraftForm(draft) {
   titleInput.value = draft.title;
   contentInput.value = draft.content;
@@ -411,7 +397,6 @@ function fillDraftForm(draft) {
   renderPreviewImages();
 }
 
-// 进入发布页时，判断是否需要回填
 function loadPublishPage() {
   const pageName = window.location.hash.split("?")[0];
 
@@ -462,13 +447,11 @@ function loadPublishPage() {
   }
 }
 
-// 选择图片后保存文件，并刷新预览
 addEvent(imageInput, "change", () => {
   selectedFiles = Array.from(imageInput.files);
   renderPreviewImages();
 });
 
-// 点击删除按钮时，删除对应图片
 addEvent(previewList, "click", (event) => {
   const deleteButton = event.target.closest(".del-img");
 
@@ -496,19 +479,16 @@ addEvent(previewList, "click", (event) => {
   renderPreviewImages();
 });
 
-// 点击权限按钮时，切换当前权限
 permissionButtons.forEach((button) => {
   addEvent(button, "click", () => {
     changePermission(button);
   });
 });
 
-// 正式发布按钮，根据当前权限发布或保存草稿
 addEvent(publishButton, "click", () => {
   createPost(currentPermission);
 });
 
-// 草稿按钮固定保存草稿
 addEvent(draftButton, "click", () => {
   saveDraft();
 });
