@@ -8,6 +8,7 @@ const historyList = getElement(".search-history");
 const resultBack = getElement(".search-result-page .back");
 const resultCount = getElement(".search-result-page .result-count");
 const resultList = getElement(".search-result .items");
+const recommendList = getElement(".search-recommend-list");
 
 function getSearchText() {
   return searchInput.value.trim();
@@ -155,6 +156,98 @@ function renderSearchResult(posts, users) {
   });
 }
 
+function getRecommendPosts(data) {
+  return data[0];
+}
+
+function getRecommendUsers(data) {
+  return data[1];
+}
+
+function renderSearchRecommend(posts, users) {
+  recommendList.innerHTML = "";
+
+  if (posts.length === 0 && users.length === 0) {
+    recommendList.innerHTML = '<li class="recommend-item">No recommend posts</li>';
+    return;
+  }
+
+  posts.forEach((post) => {
+    let imageHtml = "";
+
+    if (post.image !== "" && post.image !== null) {
+      imageHtml = `<img src="${post.image}" alt="" class="image" />`;
+    }
+
+    recommendList.innerHTML += `
+      <li class="recommend-item recommend-post" data-id="${post.postId}">
+        <div class="post">
+          <div class="post-head">
+            <div class="avater">
+              <div class="avater-infos">
+                <p class="avater-id">${post.title}</p>
+                <p class="time">${post.createTime}</p>
+              </div>
+            </div>
+            <i class="iconfont icon-a-gf-dots1"></i>
+          </div>
+          ${imageHtml}
+          <div class="description">
+            <p>${post.content}</p>
+          </div>
+        </div>
+      </li>
+    `;
+  });
+
+  users.forEach((user) => {
+    recommendList.innerHTML += `
+      <li class="recommend-item recommend-user" data-user-id="${user.userId}">
+        <div class="post">
+          <div class="post-head">
+            <div class="avater">
+              <div class="avater-img">
+                <img src="${user.url}" alt="" />
+              </div>
+              <div class="avater-infos">
+                <p class="avater-id">${user.username}</p>
+                <p class="time">${user.createTime || ""}</p>
+              </div>
+            </div>
+            <i class="iconfont icon-a-gf-dots1"></i>
+          </div>
+          <div class="description">
+            <p>User</p>
+          </div>
+        </div>
+      </li>
+    `;
+  });
+}
+
+function getSearchRecommend() {
+  const token = localStorage.getItem("token");
+
+  request("/search/getSearchRecommend", "GET", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Get search recommend failed:", result.msg);
+        return;
+      }
+
+      const data = result.data;
+      const posts = getRecommendPosts(data);
+      const users = getRecommendUsers(data);
+
+      renderSearchRecommend(posts, users);
+    })
+    .catch((error) => {
+      console.log("Request search recommend failed:", error);
+    });
+}
+
 function getSearchResult() {
   const token = localStorage.getItem("token");
   const keyword = getKeywordFromHash();
@@ -200,6 +293,7 @@ function loadSearchPage() {
 
   if (pageName === "#search") {
     renderSearchHistory();
+    getSearchRecommend();
   }
 
   if (pageName === "#search-result") {
@@ -228,6 +322,30 @@ addEvent(historyList, "click", (event) => {
 
   searchInput.value = keyword;
   goSearchResult(keyword);
+});
+
+addEvent(recommendList, "click", (event) => {
+  const userItem = event.target.closest(".recommend-user");
+
+  if (userItem) {
+    const userId = userItem.dataset.userId;
+    window.location.hash = `#other?id=${userId}`;
+    return;
+  }
+
+  const item = event.target.closest(".recommend-post");
+
+  if (!item) {
+    return;
+  }
+
+  const postId = item.dataset.id;
+
+  if (!postId) {
+    return;
+  }
+
+  window.location.hash = `#post-detials?id=${postId}`;
 });
 
 addEvent(resultList, "click", (event) => {
