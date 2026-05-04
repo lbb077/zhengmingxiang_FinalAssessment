@@ -176,23 +176,23 @@ function renderSearchRecommend(posts, users) {
     let imageHtml = "";
 
     if (post.image !== "" && post.image !== null) {
-      imageHtml = `<img src="${post.image}" alt="" class="image" />`;
+      imageHtml = `<img src="${post.image}" alt="" class="recommend-image" />`;
     }
 
     recommendList.innerHTML += `
       <li class="recommend-item recommend-post" data-id="${post.postId}">
-        <div class="post">
-          <div class="post-head">
-            <div class="avater">
-              <div class="avater-infos">
-                <p class="avater-id">${post.title}</p>
-                <p class="time">${post.createTime}</p>
+        <div class="recommend-card">
+          <div class="recommend-head">
+            <div class="recommend-author">
+              <div class="recommend-info">
+                <p class="recommend-title">${post.title}</p>
+                <p class="recommend-time">${post.createTime}</p>
               </div>
             </div>
             <i class="iconfont icon-a-gf-dots1"></i>
           </div>
           ${imageHtml}
-          <div class="description">
+          <div class="recommend-description">
             <p>${post.content}</p>
           </div>
         </div>
@@ -203,20 +203,20 @@ function renderSearchRecommend(posts, users) {
   users.forEach((user) => {
     recommendList.innerHTML += `
       <li class="recommend-item recommend-user" data-user-id="${user.userId}">
-        <div class="post">
-          <div class="post-head">
-            <div class="avater">
-              <div class="avater-img">
+        <div class="recommend-card">
+          <div class="recommend-head">
+            <div class="recommend-author">
+              <div class="recommend-avatar-img">
                 <img src="${user.url}" alt="" />
               </div>
-              <div class="avater-infos">
-                <p class="avater-id">${user.username}</p>
-                <p class="time">${user.createTime || ""}</p>
+              <div class="recommend-info">
+                <p class="recommend-title">${user.username}</p>
+                <p class="recommend-time">${user.createTime || ""}</p>
               </div>
             </div>
             <i class="iconfont icon-a-gf-dots1"></i>
           </div>
-          <div class="description">
+          <div class="recommend-description">
             <p>User</p>
           </div>
         </div>

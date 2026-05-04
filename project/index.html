@@ -87,6 +87,7 @@
             <ul class="right-post-list"></ul>
           </div>
         </div>
+        <div class="for-you-loading">Loading...</div>
       </div>
       <div class="Follow">
         <div class="follow">
@@ -171,7 +172,9 @@
         <button class="push-comment">submit</button>
       </div>
       <div class="comment-sort">
-        <button class="sort-btn active" type="button" data-sort="1">Time</button>
+        <button class="sort-btn active" type="button" data-sort="1">
+          Time
+        </button>
         <button class="sort-btn" type="button" data-sort="2">Likes</button>
       </div>
       <div class="comments comment-list">
@@ -198,7 +201,7 @@
       <div class="navi-bar">
         <div class="User">
           <img src="" alt="#" class="detial-avater" />
-          <div class="notifications">99+</div>
+          <div class="notifications"></div>
         </div>
         <div class="icons">
           <i class="iconfont icon-add"></i>
@@ -219,6 +222,7 @@
           </div>
           <div class="userName-and-info">
             <p class="username"></p>
+            <p class="signature">111</p>
             <div class="data">
               <ul>
                 <li>
@@ -235,7 +239,7 @@
                 </li>
               </ul>
             </div>
-            <p class="desc"></p>
+
             <div class="buttons">
               <button class="edit-profile">Edit Profile</button>
               <button class="message">
@@ -315,91 +319,39 @@
           <li class="like">Likes</li>
           <li class="follow">Follow</li>
           <li class="comment">Comments</li>
+          <li class="star">Star</li>
+          <li class="like-comment">L and C</li>
         </ul>
       </div>
-      <div class="message-list">
-        <ul>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img src="" alt="" class="avater" />
-            </div>
-            <div class="preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="the-last">灌注塔菲喵 灌注塔菲谢谢喵</p>
-            </div>
-          </li>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img src="" alt="" class="avater" />
-            </div>
-            <div class="message-preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="the-last">灌注塔菲喵 灌注塔菲谢谢喵</p>
-            </div>
-          </li>
-        </ul>
+      <div class="message-list messageList-active">
+        <ul></ul>
       </div>
       <div class="like-list">
-        <ul>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img src="" alt="" class="avater" />
-            </div>
-            <div class="preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="likes">like your post</p>
-            </div>
-          </li>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img src="" alt="" class="avater" />
-            </div>
-            <div class="preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="likes">like your post</p>
-            </div>
-          </li>
-        </ul>
+        <ul></ul>
       </div>
       <div class="follow-list">
-        <ul>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img src="" alt="" class="avater" />
-            </div>
-            <div class="preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="likes">start follow you</p>
-            </div>
-          </li>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img src="" alt="" class="avater" />
-            </div>
-            <div class="preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="likes">start follow you</p>
-            </div>
-          </li>
-        </ul>
+        <ul></ul>
+      </div>
+      <div class="comment-list">
+        <ul></ul>
+      </div>
+      <div class="star-list">
+        <ul></ul>
+      </div>
+      <div class="like-comment-list">
+        <ul></ul>
       </div>
     </div>
     <div class="chat-page">
       <div class="chat-head">
         <div class="talker-info">
-          <i class="iconfont icon-arrowleft"></i>
+          <i class="iconfont icon-arrowleft back-btn"></i>
           <div class="talker">
             <img src="" alt="" class="talker-img" />
-          </div>
-          <div class="title">
-            <p class="talker-name">taffy</p>
-            <p class="active-time">2025-4-20</p>
+            <div class="talker-details">
+              <p class="talker-name">taffy</p>
+              <p class="active-time">Active 11m ago</p>
+            </div>
           </div>
         </div>
         <div class="head-icons">
@@ -407,14 +359,47 @@
           <i class="iconfont icon-shipin"></i>
         </div>
       </div>
-      <div class="chat-content"></div>
-      <div class="footer-input">
-        <input type="text" placeholder="message..." id="send-message" />
-        <div class="chat-icons">
-          <i class="iconfont icon-yuyin"></i>
-          <i class="iconfont icon-emoji"></i>
-          <i class="iconfont icon-icon-"></i>
+      <div class="chat-content">
+        <div class="timestamp"><span>Nov 30, 2023, 9:41 AM</span></div>
+        <div class="recipient-chat">
+          <div class="chat-bubble-row">
+            <img src="" alt="" class="avatar" />
+            <div class="message-bubbles">
+              <div class="message-bubble">Hmmm</div>
+            </div>
+          </div>
         </div>
+        <div class="sender-chat">
+          <div class="chat-bubble-row">
+            <div class="message-bubbles">
+              <div class="message-bubble">
+                You just edit any text to type in the conversation you want to
+                show
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="recipient-chat">
+          <div class="chat-bubble-row">
+            <img src="" alt="" class="avatar" />
+            <div class="message-bubbles">
+              <div class="message-bubble">Oh?</div>
+              <div class="message-bubble">Cool</div>
+              <div class="message-bubble">How does it work?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-input">
+        <div class="input-container">
+          <input type="text" placeholder="Message..." id="send-message" />
+          <span class="chat-icons">
+            <i class="iconfont icon-yuyin"></i>
+            <i class="iconfont icon-emoji"></i>
+            <i class="iconfont icon-icon-"></i>
+          </span>
+        </div>
+        <button class="send-btn">push</button>
       </div>
     </div>
     <div class="pulish-page">
@@ -426,7 +411,7 @@
       </div>
       <div class="pulish-content">
         <div class="push-img">
-          <input type="file" multiple id="pulish-image" />
+          <input type="file" multiple accept="image/*" id="pulish-image" />
           <label for="pulish-image">
             <i class="iconfont icon-add"></i>
           </label>
@@ -539,6 +524,17 @@
             />
           </div>
           <button class="save-username" type="button">Save</button>
+        </li>
+        <li class="settings-item signature-setting">
+          <div>
+            <h3>Signature</h3>
+            <input
+              type="text"
+              id="setting-signature"
+              placeholder="edit your signature"
+            />
+          </div>
+          <button class="save-signature" type="button">Save</button>
         </li>
         <li class="settings-item logout-item">
           <div>

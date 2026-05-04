@@ -362,3 +362,9 @@
 .Topic {
   display: none;
 }
+.for-you-loading {
+  padding: 4vw 0 24vw;
+  text-align: center;
+  font-size: 3.4vw;
+  color: #777777;
+}

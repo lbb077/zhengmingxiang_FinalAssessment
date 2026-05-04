@@ -9,6 +9,8 @@ import "./personal.js";
 import "./other.js";
 import "./settings.js";
 import "./search.js";
+import "./message.js";
+import "./chat.js";
 window.addEventListener("hashchange", router);
 window.addEventListener("load", router);
 const barItems = getElements(".bottom-top-bar li");

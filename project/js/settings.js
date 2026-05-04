@@ -4,7 +4,9 @@ import request from "./request.js";
 const avatarFile = getElement("#avatar-file");
 const backgroundFile = getElement("#background-file");
 const usernameInput = getElement("#setting-username");
+const SignatureInput = getElement("#setting-signature");
 const saveUsernameBtn = getElement(".save-username");
+const saveUserSignnatureBtn = getElement(".save-signature");
 const logoutBtn = getElement(".logout-btn");
 const backBtn = getElement(".settings-back");
 
@@ -102,9 +104,7 @@ function changeUsername() {
     return;
   }
 
-  updateUser({
-    userName: userName,
-  });
+  updateUser({ userName: userName });
 }
 
 function logout() {
@@ -113,6 +113,16 @@ function logout() {
   window.location.hash = "#login";
 }
 
+function changeSignature() {
+  const signature = SignatureInput.value.trim();
+
+  if (signature === "") {
+    console.log("Signature cannot be empty");
+    return;
+  }
+
+  updateUser({ signature: signature });
+}
 addEvent(avatarFile, "change", () => {
   changeAvatar();
 });
@@ -131,4 +141,7 @@ addEvent(logoutBtn, "click", () => {
 
 addEvent(backBtn, "click", () => {
   window.location.hash = "#personal";
+});
+addEvent(saveUserSignnatureBtn, "click", () => {
+  changeSignature();
 });

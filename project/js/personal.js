@@ -4,11 +4,12 @@ import request from "./request.js";
 const editProfileBtn = getElement(".edit-profile");
 const messageBtn = getElement(".userName-and-info .message");
 const settingBtn = getElement(".personal .icon-settings");
+const notificationEl = getElement(".personal .notifications");
 const navUserImg = getElement(".personal .User img");
 const avatarImg = getElement(".personal .Avater .border img");
 const backgroundImg = getElement(".personal .profile-bg-img");
 const usernameEl = getElement(".personal .username");
-const signatureEl = getElement(".personal .desc");
+const signatureEl = getElement(".personal .signature");
 const postsEl = getElement(".personal .posts");
 const followersEl = getElement(".personal .followers");
 const followingEl = getElement(".personal .following");
@@ -95,6 +96,39 @@ function getUserPosts() {
     })
     .catch((err) => {
       console.error("Request personal posts failed:", err);
+    });
+}
+
+function getUnreadMessages() {
+  const token = localStorage.getItem("token");
+
+  request("/message/unread", "GET", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Get unread messages failed:", result.msg);
+        return;
+      }
+
+      const messages = result.data.messages || [];
+      const count = messages.length;
+
+      if (count === 0) {
+        notificationEl.style.display = "none";
+        return;
+      }
+
+      notificationEl.style.display = "block";
+
+      if (count > 99) {
+        notificationEl.textContent = "99+";
+      } else {
+        notificationEl.textContent = count;
+      }
+    })
+    .catch((error) => {
+      console.log("Request unread messages failed:", error);
     });
 }
 
@@ -347,6 +381,7 @@ addEvent(tabItems[1], "click", () => {
 
 function loadPersonalPage() {
   getUserInfo();
+  getUnreadMessages();
   showPostsView();
 }
 
@@ -359,5 +394,3 @@ window.addEventListener("hashchange", () => {
 });
 
 loadPersonalPage();
-
-

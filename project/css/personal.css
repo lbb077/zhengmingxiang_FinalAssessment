@@ -355,3 +355,6 @@
   background-color: #fff1f1;
   border: 0.3vw solid #ffd0d0;
 }
+.signature {
+  color: rgba(0, 0, 0, 0.5);
+}

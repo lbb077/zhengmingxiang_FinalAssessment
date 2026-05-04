@@ -53,7 +53,8 @@
 
 .settings-label,
 .save-username,
-.logout-btn {
+.logout-btn,
+.save-signature {
   min-width: 19vw;
   height: 9vw;
   border: none;
@@ -74,7 +75,8 @@
   align-items: flex-end;
 }
 
-#setting-username {
+#setting-username,
+#setting-signature {
   width: 52vw;
   height: 9vw;
   padding: 0 3vw;

@@ -142,6 +142,22 @@
 .commenter-id {
   font-weight: 600;
 }
+.comment-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2vw;
+}
+.comment-delete {
+  min-width: 12vw;
+  height: 7.2vw;
+  padding: 0 2.5vw;
+  border-radius: 2vw;
+  font-size: 3.2vw;
+  color: #d85c5c;
+  background: #fff1f1;
+  border: 0.3vw solid #ffd0d0;
+}
 .icons-and-time {
   display: flex;
   justify-content: space-between;
@@ -149,6 +165,9 @@
 .comment-icons i {
   margin: 0 1vw;
   font-size: 5.26vw;
+}
+.comment-like.active {
+  color: #e84c4f;
 }
 .child-comment-list {
   margin-top: 2vw;

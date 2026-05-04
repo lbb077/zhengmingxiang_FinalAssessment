@@ -10,6 +10,7 @@ const locationInput = getElement("#location");
 const publishButton = getElement("#pulish");
 const draftButton = getElement("#draft");
 const previewList = getElement(".show-photos ul");
+const publishAvatarImg = getElement(".pulish-head .avater-img");
 const permissionButtons = getElements(".choose-permission button");
 
 let selectedFiles = [];
@@ -17,6 +18,37 @@ let oldImageUrls = [];
 let currentPermission = 1;
 let editPostId = "";
 let editDraftId = "";
+
+function renderPublishAvatar() {
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+
+  if (!token || !userId) {
+    publishAvatarImg.src = "";
+    return;
+  }
+
+  request(`/user/getDetail/${userId}`, "POST", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Get publish avatar failed:", result.msg);
+        return;
+      }
+
+      const user = result.data;
+
+      if (user.image !== "" && user.image !== null && user.image !== undefined) {
+        publishAvatarImg.src = user.image;
+      } else {
+        publishAvatarImg.src = "";
+      }
+    })
+    .catch((error) => {
+      console.log("Request publish avatar failed:", error);
+    });
+}
 
 function renderPreviewImages() {
   previewList.innerHTML = "";
@@ -416,6 +448,7 @@ function loadPublishPage() {
   previewList.innerHTML = "";
   currentPermission = 1;
   setPermissionButton(currentPermission);
+  renderPublishAvatar();
 
   const postText = localStorage.getItem("editPostData");
   const postId = localStorage.getItem("editPostId");
@@ -448,7 +481,13 @@ function loadPublishPage() {
 }
 
 addEvent(imageInput, "change", () => {
-  selectedFiles = Array.from(imageInput.files);
+  const newFiles = Array.from(imageInput.files);
+
+  newFiles.forEach((file) => {
+    selectedFiles.push(file);
+  });
+
+  imageInput.value = "";
   renderPreviewImages();
 });
 

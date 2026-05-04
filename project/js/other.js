@@ -1,4 +1,4 @@
-﻿import { getElement, addEvent } from "./utils.js";
+import { getElement, addEvent } from "./utils.js";
 import request from "./request.js";
 
 const otherAvatarImg = getElement(".other .Avater .border img");
@@ -180,7 +180,9 @@ addEvent(otherPostList, "click", (event) => {
 });
 
 addEvent(otherMessageBtn, "click", () => {
-  window.location.hash = "#message";
+  const userId = getOtherUserId();
+  if (!userId) return;
+  window.location.hash = `#chat?id=${userId}`;
 });
 
 window.addEventListener("hashchange", () => {

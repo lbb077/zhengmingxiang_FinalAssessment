@@ -11,6 +11,9 @@ const api = {
   follow: (id) => `/follow/${id}`,
   cancelFollow: (id) => `/follow/unfollow/${id}`,
   childComments: (parentId) => `/comment/child/${parentId}`,
+  commentLike: (id) => `/comment/like/${id}`,
+  commentUnlike: (id) => `/comment/unlike/${id}`,
+  deleteComment: (id) => `/comment/delete/${id}`,
   addComment: "/comment",
 };
 
@@ -308,6 +311,8 @@ export function renderDetail(post) {
 }
 
 export function renderCommentList(comments) {
+  const myUserId = localStorage.getItem("userId");
+
   if (comments.length === 0) {
     commentList.innerHTML =
       '<p class="empty-comment">\u6682\u65e0\u8bc4\u8bba</p>';
@@ -318,10 +323,22 @@ export function renderCommentList(comments) {
 
   comments.forEach((comment) => {
     const commentId = comment.commentId;
+    const commentUserId = String(comment.userId);
     const userName = comment.userName;
     let userImage = "";
+    let likedClass = "";
+    let deleteButtonHtml = "";
     const content = comment.content;
     const time = comment.createTime;
+
+    if (commentUserId === myUserId) {
+      deleteButtonHtml =
+        '<button class="comment-delete" type="button">del</button>';
+    }
+
+    if (comment.isLiked) {
+      likedClass = "active";
+    }
 
     if (
       comment.userImage !== "" &&
@@ -337,12 +354,16 @@ export function renderCommentList(comments) {
           <img src="${userImage}" alt="#" class="detial-avater" />
         </div>
         <div class="comment-info">
-          <p class="commenter-id">${userName}</p>
+          <div class="comment-title">
+            <p class="commenter-id">${userName}</p>
+            ${deleteButtonHtml}
+          </div>
           <p>${content}</p>
           <div class="icons-and-time">
             <p class="time">${time}</p>
             <div class="comment-icons">
-              <i class="iconfont icon-24px"></i>
+              <i class="iconfont icon-24px comment-like ${likedClass}"></i>
+              <span>${comment.likeCount} Likes</span>
               <i class="iconfont icon-pinglun reply-comment"></i>
               <i class="iconfont icon-share"></i>
             </div>
@@ -558,6 +579,51 @@ export function toggleCollect() {
     });
 }
 
+function toggleCommentLike(commentId, likeButton) {
+  const token = localStorage.getItem("token");
+  const postId = getPostIdFromHash();
+  let url = api.commentLike(commentId);
+
+  if (likeButton.classList.contains("active")) {
+    url = api.commentUnlike(commentId);
+  }
+
+  request(url, "POST", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Comment like failed:", result.msg);
+        return;
+      }
+
+      getComments(postId);
+    })
+    .catch((error) => {
+      console.log("Comment like request failed:", error);
+    });
+}
+
+function deleteComment(commentId) {
+  const token = localStorage.getItem("token");
+  const postId = getPostIdFromHash();
+
+  request(api.deleteComment(commentId), "POST", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Delete comment failed:", result.msg);
+        return;
+      }
+
+      getComments(postId);
+    })
+    .catch((error) => {
+      console.log("Delete comment request failed:", error);
+    });
+}
+
 export function toggleFollow() {
   if (!currentDetailPost) return;
 
@@ -665,6 +731,36 @@ export function bindDetailEvents() {
   followButton.onclick = toggleFollow;
   commentButton.onclick = submitComment;
   commentList.onclick = (event) => {
+    const deleteButton = event.target.closest(".comment-delete");
+
+    if (deleteButton) {
+      const item = event.target.closest(".comment-item");
+
+      if (!item) {
+        return;
+      }
+
+      const commentId = item.dataset.commentId;
+
+      deleteComment(commentId);
+      return;
+    }
+
+    const likeButton = event.target.closest(".comment-like");
+
+    if (likeButton) {
+      const item = event.target.closest(".comment-item");
+
+      if (!item) {
+        return;
+      }
+
+      const commentId = item.dataset.commentId;
+
+      toggleCommentLike(commentId, likeButton);
+      return;
+    }
+
     const replyButton = event.target.closest(".reply-comment");
 
     if (!replyButton) {
