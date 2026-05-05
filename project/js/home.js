@@ -118,6 +118,7 @@ function renderPosts(postsData) {
     const avatar = post.userImage;
     const userName = post.userName;
     const time = post.createTime;
+    const title = post.title || "";
     const content = post.content;
     const likes = post.likeCount;
     const comments = post.commentCount;
@@ -134,18 +135,13 @@ function renderPosts(postsData) {
                 <div class="photo">
                   <div class="post">
                     <div class="post-head">
-                      <div class="avater">
-                        <div class="avater-img">
-                          <img
-                            ${avatarSrc}
-                            alt=""
-                          />
-                        </div>
-                        <div class="avater-infos">
-                          <p class="avater-id">${userName}</p>
-                          <p class="time">${time}</p>
-                        </div>
+                      <div class="avater-img">
+                        <img
+                          ${avatarSrc}
+                          alt=""
+                        />
                       </div>
+                      <p class="avater-id">${userName}</p>
                       <i class="iconfont icon-a-gf-dots1"></i>
                     </div>
                     <img
@@ -172,18 +168,13 @@ function renderPosts(postsData) {
                 <div class="only-text">
                   <div class="post">
                     <div class="post-head">
-                      <div class="avater">
-                        <div class="avater-img">
-                          <img
-                            ${avatarSrc}
-                            alt=""
-                          />
-                        </div>
-                        <div class="avater-infos">
-                          <p class="avater-id">${userName}</p>
-                          <p class="time">${time}</p>
-                        </div>
+                      <div class="avater-img">
+                        <img
+                          ${avatarSrc}
+                          alt=""
+                        />
                       </div>
+                      <p class="avater-id">${userName}</p>
                       <i class="iconfont icon-a-gf-dots1"></i>
                     </div>
                     <p class="post-content">
@@ -252,6 +243,7 @@ function appendPosts(postsData) {
     const avatar = post.userImage;
     const userName = post.userName;
     const time = post.createTime;
+    const title = post.title || "";
     const content = post.content;
     const likes = post.likeCount;
     const comments = post.commentCount;
@@ -268,17 +260,18 @@ function appendPosts(postsData) {
                 <div class="photo">
                   <div class="post">
                     <div class="post-head">
-                      <div class="avater">
-                        <div class="avater-img">
-                          <img
-                            ${avatarSrc}
-                            alt=""
-                          />
-                        </div>
-                        <div class="avater-infos">
+                      <div class="avater-img">
+                        <img
+                          ${avatarSrc}
+                          alt=""
+                        />
+                      </div>
+                      <div class="post-head-info">
+                        <div class="post-meta">
                           <p class="avater-id">${userName}</p>
                           <p class="time">${time}</p>
                         </div>
+                        <p class="post-title">${title}</p>
                       </div>
                       <i class="iconfont icon-a-gf-dots1"></i>
                     </div>
@@ -287,6 +280,10 @@ function appendPosts(postsData) {
                       alt=""
                       class="image"
                     />
+                    <div class="post-summary">
+                      <p class="post-title">${title}</p>
+                      <p class="time">${time}</p>
+                    </div>
                     <div class="description">
                       <p>${content}</p> 
                       <div class="post-action">
@@ -306,19 +303,18 @@ function appendPosts(postsData) {
                 <div class="only-text">
                   <div class="post">
                     <div class="post-head">
-                      <div class="avater">
-                        <div class="avater-img">
-                          <img
-                            ${avatarSrc}
-                            alt=""
-                          />
-                        </div>
-                        <div class="avater-infos">
-                          <p class="avater-id">${userName}</p>
-                          <p class="time">${time}</p>
-                        </div>
+                      <div class="avater-img">
+                        <img
+                          ${avatarSrc}
+                          alt=""
+                        />
                       </div>
+                      <p class="avater-id">${userName}</p>
                       <i class="iconfont icon-a-gf-dots1"></i>
+                    </div>
+                    <div class="post-summary">
+                      <p class="post-title">${title}</p>
+                      <p class="time">${time}</p>
                     </div>
                     <p class="post-content">
                       ${content}
@@ -509,6 +505,7 @@ function renderTopicPosts(posts) {
     const avatar = post.userImage;
     const userName = post.userName;
     const time = post.createTime;
+    const title = post.title || "";
     const content = post.content;
     const likes = post.likeCount;
     const comments = post.commentCount;
@@ -525,14 +522,15 @@ function renderTopicPosts(posts) {
           <div class="photo">
             <div class="post">
               <div class="post-head">
-                <div class="avater">
-                  <div class="avater-img">
-                    <img ${avatarSrc} alt="" />
-                  </div>
-                  <div class="avater-infos">
+                <div class="avater-img">
+                  <img ${avatarSrc} alt="" />
+                </div>
+                <div class="post-head-info">
+                  <div class="post-meta">
                     <p class="avater-id">${userName}</p>
                     <p class="time">${time}</p>
                   </div>
+                  <p class="post-title">${title}</p>
                 </div>
                 <i class="iconfont icon-a-gf-dots1"></i>
               </div>
@@ -556,14 +554,15 @@ function renderTopicPosts(posts) {
           <div class="only-text">
             <div class="post">
               <div class="post-head">
-                <div class="avater">
-                  <div class="avater-img">
-                    <img ${avatarSrc} alt="" />
-                  </div>
-                  <div class="avater-infos">
+                <div class="avater-img">
+                  <img ${avatarSrc} alt="" />
+                </div>
+                <div class="post-head-info">
+                  <div class="post-meta">
                     <p class="avater-id">${userName}</p>
                     <p class="time">${time}</p>
                   </div>
+                  <p class="post-title">${title}</p>
                 </div>
                 <i class="iconfont icon-a-gf-dots1"></i>
               </div>
