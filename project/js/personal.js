@@ -231,7 +231,7 @@ function deletePost(postId) {
         return;
       }
 
-      console.log("Delete post success");
+      console.log("Delete success");
       getUserInfo();
       getUserPosts();
     })

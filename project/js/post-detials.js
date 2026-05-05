@@ -208,7 +208,11 @@ function renderAuthorAvatar(userId) {
 
       const user = result.data;
 
-      if (user.image === "" || user.image === null || user.image === undefined) {
+      if (
+        user.image === "" ||
+        user.image === null ||
+        user.image === undefined
+      ) {
         authorAvatar.src = "";
         return;
       }
@@ -235,7 +239,11 @@ function renderMyAvatar() {
 
       const user = result.data;
 
-      if (user.image === "" || user.image === null || user.image === undefined) {
+      if (
+        user.image === "" ||
+        user.image === null ||
+        user.image === undefined
+      ) {
         commentAvatar.src = "";
         return;
       }
@@ -314,8 +322,7 @@ export function renderCommentList(comments) {
   const myUserId = localStorage.getItem("userId");
 
   if (comments.length === 0) {
-    commentList.innerHTML =
-      '<p class="empty-comment">\u6682\u65e0\u8bc4\u8bba</p>';
+    commentList.innerHTML = '<p class="empty-comment">无评论</p>';
     return;
   }
 
@@ -386,7 +393,12 @@ export function renderCommentList(comments) {
 function getChildComments(parentId) {
   const token = localStorage.getItem("token");
 
-  return request(api.childComments(parentId), "GET", {}, { Authorization: token })
+  return request(
+    api.childComments(parentId),
+    "GET",
+    {},
+    { Authorization: token },
+  )
     .then((res) => {
       const result = res.data;
 
@@ -408,9 +420,7 @@ function getChildComments(parentId) {
 }
 
 function renderChildComments(commentId, children) {
-  const box = getElement(
-    `.child-comment-list[data-comment-id="${commentId}"]`,
-  );
+  const box = getElement(`.child-comment-list[data-comment-id="${commentId}"]`);
 
   if (!box) {
     return;
@@ -449,8 +459,8 @@ export function getPostDetail() {
   clearDetailPage();
 
   if (!postId) {
-    showDetailError("\u5e16\u5b50\u4e0d\u5b58\u5728");
-    console.log("Post id is empty");
+    showDetailError("帖子不存在");
+
     return;
   }
 
@@ -459,17 +469,13 @@ export function getPostDetail() {
       const result = res.data;
 
       if (result.code !== 200) {
-        showDetailError(
-          "\u5e16\u5b50\u52a0\u8f7d\u5931\u8d25\uff0c\u8bf7\u7a0d\u540e\u91cd\u8bd5",
-        );
+        showDetailError("帖子加载失败");
         console.log("Get post detail failed:", result.msg);
         return;
       }
 
       if (!result.data) {
-        showDetailError(
-          "\u5e16\u5b50\u52a0\u8f7d\u5931\u8d25\uff0c\u8bf7\u7a0d\u540e\u91cd\u8bd5",
-        );
+        showDetailError("帖子加载失败");
         console.log("Get post detail failed:", result.msg);
         return;
       }
@@ -478,9 +484,7 @@ export function getPostDetail() {
       getComments(postId);
     })
     .catch((error) => {
-      showDetailError(
-        "\u5e16\u5b50\u52a0\u8f7d\u5931\u8d25\uff0c\u8bf7\u7a0d\u540e\u91cd\u8bd5",
-      );
+      showDetailError("帖子加载失败");
       console.log("Request post detail error:", error);
     });
 }
@@ -500,8 +504,7 @@ export function getComments(postId) {
       const result = res.data;
 
       if (result.code !== 200) {
-        commentList.innerHTML =
-          '<p class="empty-comment">\u8bc4\u8bba\u52a0\u8f7d\u5931\u8d25</p>';
+        commentList.innerHTML = '<p class="empty-comment">暂无评论</p>';
         console.log("Get comments failed:", result.msg);
         return;
       }
@@ -510,8 +513,7 @@ export function getComments(postId) {
       renderCommentList(list);
     })
     .catch((error) => {
-      commentList.innerHTML =
-        '<p class="empty-comment">\u8bc4\u8bba\u52a0\u8f7d\u5931\u8d25</p>';
+      commentList.innerHTML = '<p class="empty-comment">暂无评论</p>';
       console.log("Request comments error:", error);
     });
 }
@@ -815,5 +817,3 @@ function renderPostDetail() {
 }
 
 export { renderPostDetail };
-
-

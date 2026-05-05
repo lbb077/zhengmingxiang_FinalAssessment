@@ -70,14 +70,7 @@ function getChatHistory(userId) {
     pageSize: 10,
   };
 
-  console.log("Get chat history params:", params);
-
-  return request(
-    "/chat/history",
-    "GET",
-    params,
-    { Authorization: token },
-  )
+  return request("/chat/history", "GET", params, { Authorization: token })
     .then((res) => {
       const result = res.data;
 
@@ -159,12 +152,14 @@ function renderChatMessages() {
   messages.forEach((message) => {
     const isMe = String(message.senderId) === String(myId);
     const otherUser = userMap[currentChatUserId];
-    const avatarSrc = !isMe && otherUser && otherUser.image ? otherUser.image : "";
+    const avatarSrc =
+      !isMe && otherUser && otherUser.image ? otherUser.image : "";
 
     let statusHtml = "";
 
     if (isMe && message.status === "sending") {
-      statusHtml = '<span class="message-status status-sending">sending...</span>';
+      statusHtml =
+        '<span class="message-status status-sending">sending...</span>';
     }
 
     if (isMe && message.status === "failed") {
@@ -218,7 +213,7 @@ function initWebSocket() {
   ws = new WebSocket(`wss://duck1437.shop/ws/chat?token=${token}`);
 
   ws.onopen = () => {
-    console.log("WebSocket connected");
+    console.log("WebSocket connect");
   };
 
   ws.onmessage = (event) => {

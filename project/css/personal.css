@@ -32,7 +32,6 @@
   border-bottom: 0.22vw solid rgba(255, 255, 255, 0.72);
   box-shadow: 0 1.2vw 4vw rgba(15, 23, 42, 0.06);
   backdrop-filter: blur(5vw) saturate(150%);
-  -webkit-backdrop-filter: blur(5vw) saturate(150%);
 }
 .User {
   display: flex;
@@ -164,7 +163,6 @@
     0 2vw 5.8vw rgba(15, 23, 42, 0.08),
     inset 0 0.28vw 0 rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(4vw) saturate(150%);
-  -webkit-backdrop-filter: blur(4vw) saturate(150%);
 }
 .userName-and-info .data ul {
   display: flex;
@@ -255,7 +253,6 @@
   border-radius: 4vw;
   box-shadow: inset 0 0.24vw 0 rgba(255, 255, 255, 0.58);
   backdrop-filter: blur(3vw);
-  -webkit-backdrop-filter: blur(3vw);
 }
 .personal .tab-navi-bar ul li {
   padding: 1.8vw 4.26vw;
@@ -319,7 +316,6 @@
     0 1.8vw 5vw rgba(15, 23, 42, 0.08),
     inset 0 0.24vw 0 rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(3.6vw) saturate(145%);
-  -webkit-backdrop-filter: blur(3.6vw) saturate(145%);
 }
 
 .post-item .post {
@@ -475,7 +471,6 @@
     0 1.8vw 5vw rgba(15, 23, 42, 0.08),
     inset 0 0.24vw 0 rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(3.6vw) saturate(145%);
-  -webkit-backdrop-filter: blur(3.6vw) saturate(145%);
 }
 
 .draft-head {
