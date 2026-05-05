@@ -1,7 +1,5 @@
-import { getElement } from "./utils.js";
+﻿import { getElement } from "./utils.js";
 import request from "./request.js";
-
-const defaultAvatar = "./resources/test photos/test-user-img.jpg";
 
 const api = {
   detail: (postId) => `/post/${postId}`,
@@ -12,6 +10,10 @@ const api = {
   cancelCollect: (id) => `/post/unfav/${id}`,
   follow: (id) => `/follow/${id}`,
   cancelFollow: (id) => `/follow/unfollow/${id}`,
+  childComments: (parentId) => `/comment/child/${parentId}`,
+  commentLike: (id) => `/comment/like/${id}`,
+  commentUnlike: (id) => `/comment/unlike/${id}`,
+  deleteComment: (id) => `/comment/delete/${id}`,
   addComment: "/comment",
 };
 
@@ -31,10 +33,13 @@ const circleList = getElement(".post-detials .circle");
 const commentAvatar = getElement(".post-detials .comment-avater");
 const commentInput = getElement(".post-detials .comment-input");
 const commentButton = getElement(".post-detials .push-comment");
+const commentSort = getElement(".post-detials .comment-sort");
 const commentList = getElement(".post-detials .comment-list");
 
 let currentDetailPost = null;
 let detailEventsBinded = false;
+let currentSortType = 1;
+let currentParentId = 0;
 
 export function getPostIdFromHash() {
   const hash = window.location.hash;
@@ -55,7 +60,7 @@ export function getPostIdFromHash() {
 }
 
 export function getImages(post) {
-  if (post.images === "") {
+  if (post.images === "" || post.images === null || post.images === undefined) {
     return [];
   }
 
@@ -65,8 +70,8 @@ export function getImages(post) {
 function showDetailError(message) {
   currentDetailPost = null;
   posterName.textContent = "";
-  authorAvatar.src = defaultAvatar;
-  commentAvatar.src = defaultAvatar;
+  authorAvatar.src = "";
+  commentAvatar.src = "";
   likeCount.textContent = "";
   contentText.textContent = message;
   photoList.innerHTML = "";
@@ -77,19 +82,24 @@ function showDetailError(message) {
 function clearDetailPage() {
   currentDetailPost = null;
   posterName.textContent = "";
-  authorAvatar.src = defaultAvatar;
-  commentAvatar.src = defaultAvatar;
+  authorAvatar.src = "";
+  commentAvatar.src = "";
   likeCount.textContent = "";
   contentText.textContent = "";
   photoList.innerHTML = "";
   circleList.innerHTML = "";
+  photoList.style.transform = "translateX(0)";
+  clearInterval(banner._timer);
   commentList.innerHTML = "";
+  currentParentId = 0;
+  commentInput.placeholder = "add your comment";
   banner.style.display = "none";
   likeButton.classList.remove("active");
   likeIcon.classList.remove("active");
   collectButton.classList.remove("active");
   collectIcon.classList.remove("active");
   followButton.textContent = "follow";
+  followButton.style.display = "block";
 }
 
 function updateLikeButton() {
@@ -121,6 +131,16 @@ function updateCollectButton() {
 function updateFollowButton() {
   if (!currentDetailPost) return;
 
+  const myUserId = localStorage.getItem("userId");
+  const postUserId = String(currentDetailPost.userId);
+
+  if (postUserId === myUserId) {
+    followButton.style.display = "none";
+    return;
+  }
+
+  followButton.style.display = "block";
+
   if (currentDetailPost.isFollowing) {
     followButton.textContent = "following";
   } else {
@@ -128,10 +148,108 @@ function updateFollowButton() {
   }
 }
 
+function changeDetailImage(item, index) {
+  const list = item.querySelector(".photoset");
+  const dots = item.querySelectorAll(".circle li");
+
+  if (!list) {
+    return;
+  }
+
+  list.style.transform = `translateX(-${index * 100}%)`;
+
+  dots.forEach((dot) => {
+    dot.classList.remove("active");
+  });
+
+  if (dots[index]) {
+    dots[index].classList.add("active");
+  }
+}
+
+function startAutoPlay(item) {
+  const dots = item.querySelectorAll(".circle li");
+  let index = 0;
+
+  clearInterval(item._timer);
+
+  if (dots.length <= 1) {
+    return;
+  }
+
+  dots.forEach((dot, dotIndex) => {
+    if (dot.classList.contains("active")) {
+      index = dotIndex;
+    }
+  });
+
+  item._timer = setInterval(() => {
+    index += 1;
+
+    if (index >= dots.length) {
+      index = 0;
+    }
+
+    changeDetailImage(item, index);
+  }, 2000);
+}
+
+function renderAuthorAvatar(userId) {
+  const token = localStorage.getItem("token");
+
+  request(`/user/getDetail/${userId}`, "POST", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Get author info failed:", result.msg);
+        return;
+      }
+
+      const user = result.data;
+
+      if (user.image === "" || user.image === null || user.image === undefined) {
+        authorAvatar.src = "";
+        return;
+      }
+
+      authorAvatar.src = user.image;
+    })
+    .catch((error) => {
+      console.log("Get author info error:", error);
+    });
+}
+
+function renderMyAvatar() {
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+
+  request(`/user/getDetail/${userId}`, "POST", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Get my info failed:", result.msg);
+        return;
+      }
+
+      const user = result.data;
+
+      if (user.image === "" || user.image === null || user.image === undefined) {
+        commentAvatar.src = "";
+        return;
+      }
+
+      commentAvatar.src = user.image;
+    })
+    .catch((error) => {
+      console.log("Get my info error:", error);
+    });
+}
+
 export function renderDetail(post) {
   const postId = post.postId;
   const userId = post.userId;
-  const avatar = defaultAvatar;
   const userName = post.userName;
   const content = post.content;
   const likeCountValue = post.likeCount;
@@ -140,7 +258,6 @@ export function renderDetail(post) {
   currentDetailPost = {
     postId: postId,
     userId: userId,
-    avatar: avatar,
     userName: userName,
     content: content,
     likeCount: likeCountValue,
@@ -149,36 +266,53 @@ export function renderDetail(post) {
     isFollowing: false,
   };
 
-  authorAvatar.src = avatar;
-  commentAvatar.src = avatar;
+  authorAvatar.src = "";
+  commentAvatar.src = "";
   posterName.textContent = userName;
   contentText.textContent = content;
 
   photoList.innerHTML = "";
   circleList.innerHTML = "";
+  photoList.style.transform = "translateX(0)";
 
   if (images.length === 0) {
     banner.style.display = "none";
   } else {
     banner.style.display = "block";
 
-    images.forEach((src) => {
+    images.forEach((src, index) => {
       photoList.innerHTML += `
         <li>
           <img src="${src}" />
         </li>
       `;
 
-      circleList.innerHTML += "<li></li>";
+      if (images.length > 1) {
+        let activeClass = "";
+
+        if (index === 0) {
+          activeClass = "active";
+        }
+
+        circleList.innerHTML += `
+          <li class="${activeClass}" data-index="${index}"></li>
+        `;
+      }
     });
+
+    startAutoPlay(banner);
   }
 
   updateLikeButton();
   updateCollectButton();
   updateFollowButton();
+  renderAuthorAvatar(userId);
+  renderMyAvatar();
 }
 
 export function renderCommentList(comments) {
+  const myUserId = localStorage.getItem("userId");
+
   if (comments.length === 0) {
     commentList.innerHTML =
       '<p class="empty-comment">\u6682\u65e0\u8bc4\u8bba</p>';
@@ -188,33 +322,124 @@ export function renderCommentList(comments) {
   let html = "";
 
   comments.forEach((comment) => {
-    const avatar = defaultAvatar;
+    const commentId = comment.commentId;
+    const commentUserId = String(comment.userId);
     const userName = comment.userName;
+    let userImage = "";
+    let likedClass = "";
+    let deleteButtonHtml = "";
     const content = comment.content;
     const time = comment.createTime;
 
+    if (commentUserId === myUserId) {
+      deleteButtonHtml =
+        '<button class="comment-delete" type="button">del</button>';
+    }
+
+    if (comment.isLiked) {
+      likedClass = "active";
+    }
+
+    if (
+      comment.userImage !== "" &&
+      comment.userImage !== null &&
+      comment.userImage !== undefined
+    ) {
+      userImage = comment.userImage;
+    }
+
     html += `
-      <div class="comment-item">
+      <div class="comment-item" data-comment-id="${commentId}">
         <div class="commenter">
-          <img src="${avatar}" alt="#" class="detial-avater" />
+          <img src="${userImage}" alt="#" class="detial-avater" />
         </div>
         <div class="comment-info">
-          <p class="commenter-id">${userName}</p>
+          <div class="comment-title">
+            <p class="commenter-id">${userName}</p>
+            ${deleteButtonHtml}
+          </div>
           <p>${content}</p>
           <div class="icons-and-time">
             <p class="time">${time}</p>
             <div class="comment-icons">
-              <i class="iconfont icon-24px"></i>
-              <i class="iconfont icon-pinglun"></i>
+              <i class="iconfont icon-24px comment-like ${likedClass}"></i>
+              <span>${comment.likeCount} Likes</span>
+              <i class="iconfont icon-pinglun reply-comment"></i>
               <i class="iconfont icon-share"></i>
             </div>
           </div>
+          <div class="child-comment-list" data-comment-id="${commentId}"></div>
         </div>
       </div>
     `;
   });
 
   commentList.innerHTML = html;
+
+  comments.forEach((comment) => {
+    getChildComments(comment.commentId).then((children) => {
+      renderChildComments(comment.commentId, children);
+    });
+  });
+}
+
+function getChildComments(parentId) {
+  const token = localStorage.getItem("token");
+
+  return request(api.childComments(parentId), "GET", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Get child comments failed:", result.msg);
+        return [];
+      }
+
+      if (!result.data) {
+        return [];
+      }
+
+      return result.data;
+    })
+    .catch((error) => {
+      console.log("Request child comments failed:", error);
+      return [];
+    });
+}
+
+function renderChildComments(commentId, children) {
+  const box = getElement(
+    `.child-comment-list[data-comment-id="${commentId}"]`,
+  );
+
+  if (!box) {
+    return;
+  }
+
+  box.innerHTML = "";
+
+  children.forEach((child) => {
+    let userImage = "";
+
+    if (
+      child.userImage !== "" &&
+      child.userImage !== null &&
+      child.userImage !== undefined
+    ) {
+      userImage = child.userImage;
+    }
+
+    box.innerHTML += `
+      <div class="child-comment-item">
+        <img src="${userImage}" alt="#" class="child-comment-avatar" />
+        <div class="child-comment-info">
+          <p class="child-comment-user">${child.userName}</p>
+          <p>${child.content}</p>
+          <p class="time">${child.createTime}</p>
+        </div>
+      </div>
+    `;
+  });
 }
 
 export function getPostDetail() {
@@ -263,7 +488,14 @@ export function getPostDetail() {
 export function getComments(postId) {
   const token = localStorage.getItem("token");
 
-  request(api.comments(postId), "GET", {}, { Authorization: token })
+  request(
+    api.comments(postId),
+    "GET",
+    {
+      sortType: currentSortType,
+    },
+    { Authorization: token },
+  )
     .then((res) => {
       const result = res.data;
 
@@ -347,10 +579,62 @@ export function toggleCollect() {
     });
 }
 
+function toggleCommentLike(commentId, likeButton) {
+  const token = localStorage.getItem("token");
+  const postId = getPostIdFromHash();
+  let url = api.commentLike(commentId);
+
+  if (likeButton.classList.contains("active")) {
+    url = api.commentUnlike(commentId);
+  }
+
+  request(url, "POST", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Comment like failed:", result.msg);
+        return;
+      }
+
+      getComments(postId);
+    })
+    .catch((error) => {
+      console.log("Comment like request failed:", error);
+    });
+}
+
+function deleteComment(commentId) {
+  const token = localStorage.getItem("token");
+  const postId = getPostIdFromHash();
+
+  request(api.deleteComment(commentId), "POST", {}, { Authorization: token })
+    .then((res) => {
+      const result = res.data;
+
+      if (result.code !== 200) {
+        console.log("Delete comment failed:", result.msg);
+        return;
+      }
+
+      getComments(postId);
+    })
+    .catch((error) => {
+      console.log("Delete comment request failed:", error);
+    });
+}
+
 export function toggleFollow() {
   if (!currentDetailPost) return;
 
   if (!currentDetailPost.userId) return;
+
+  const myUserId = localStorage.getItem("userId");
+  const postUserId = String(currentDetailPost.userId);
+
+  if (postUserId === myUserId) {
+    return;
+  }
 
   const token = localStorage.getItem("token");
   let url = api.follow(currentDetailPost.userId);
@@ -391,8 +675,8 @@ export function submitComment() {
     api.addComment,
     "POST",
     {
-      postId: postId,
-      parentId: 0,
+      postId: Number(postId),
+      parentId: Number(currentParentId),
       content: content,
     },
     { Authorization: token },
@@ -406,6 +690,8 @@ export function submitComment() {
       }
 
       commentInput.value = "";
+      currentParentId = 0;
+      commentInput.placeholder = "add your comment";
       getComments(postId);
     })
     .catch((error) => {
@@ -429,6 +715,14 @@ export function bindDetailEvents() {
 
     if (!currentDetailPost.userId) return;
 
+    const myUserId = localStorage.getItem("userId");
+    const userId = String(currentDetailPost.userId);
+
+    if (userId === myUserId) {
+      window.location.hash = "#personal";
+      return;
+    }
+
     window.location.hash = `#other?id=${currentDetailPost.userId}`;
   };
 
@@ -436,6 +730,83 @@ export function bindDetailEvents() {
   collectButton.onclick = toggleCollect;
   followButton.onclick = toggleFollow;
   commentButton.onclick = submitComment;
+  commentList.onclick = (event) => {
+    const deleteButton = event.target.closest(".comment-delete");
+
+    if (deleteButton) {
+      const item = event.target.closest(".comment-item");
+
+      if (!item) {
+        return;
+      }
+
+      const commentId = item.dataset.commentId;
+
+      deleteComment(commentId);
+      return;
+    }
+
+    const likeButton = event.target.closest(".comment-like");
+
+    if (likeButton) {
+      const item = event.target.closest(".comment-item");
+
+      if (!item) {
+        return;
+      }
+
+      const commentId = item.dataset.commentId;
+
+      toggleCommentLike(commentId, likeButton);
+      return;
+    }
+
+    const replyButton = event.target.closest(".reply-comment");
+
+    if (!replyButton) {
+      return;
+    }
+
+    const item = event.target.closest(".comment-item");
+
+    if (!item) {
+      return;
+    }
+
+    currentParentId = Number(item.dataset.commentId);
+    commentInput.placeholder = "reply comment";
+    commentInput.focus();
+  };
+  commentSort.onclick = (event) => {
+    const button = event.target.closest(".sort-btn");
+
+    if (!button) {
+      return;
+    }
+
+    const buttons = commentSort.querySelectorAll(".sort-btn");
+    const postId = getPostIdFromHash();
+
+    buttons.forEach((item) => {
+      item.classList.remove("active");
+    });
+
+    button.classList.add("active");
+    currentSortType = Number(button.dataset.sort);
+    getComments(postId);
+  };
+  circleList.onclick = (event) => {
+    const dot = event.target.closest("li");
+
+    if (!dot) {
+      return;
+    }
+
+    const index = Number(dot.dataset.index);
+
+    changeDetailImage(banner, index);
+    startAutoPlay(banner);
+  };
 }
 
 function renderPostDetail() {
@@ -444,3 +815,5 @@ function renderPostDetail() {
 }
 
 export { renderPostDetail };
+
+

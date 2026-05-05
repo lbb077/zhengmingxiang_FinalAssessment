@@ -11,10 +11,16 @@
 }
 .photoset {
   display: flex;
+  transition: transform 0.3s ease;
 }
 .photoset li {
   width: 100%;
   flex-shrink: 0;
+}
+.photoset img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
 }
 .circle {
   display: flex;
@@ -29,6 +35,9 @@
   height: 3vw;
   border-radius: 50%;
   background: #ffffff;
+}
+.circle li.active {
+  background: #000000;
 }
 .icons {
   display: flex;
@@ -93,6 +102,28 @@
     0 1.6vw 4vw rgba(30, 34, 40, 0.08),
     0 0.4vw 1vw rgba(30, 34, 40, 0.05);
 }
+.comment-sort {
+  display: flex;
+  gap: 2.13vw;
+  padding: 2.13vw;
+}
+.sort-btn {
+  padding: 1.6vw 3.8vw;
+  border-radius: 5vw;
+  border: 0.27vw solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  color: #333333;
+  font-size: 3.6vw;
+  box-shadow:
+    0 1vw 3vw rgba(0, 0, 0, 0.08),
+    inset 0 0.27vw 0 rgba(255, 255, 255, 0.7);
+}
+.sort-btn.active {
+  background: rgba(255, 255, 255, 0.55);
+  color: #000000;
+  border-color: rgba(255, 255, 255, 0.8);
+}
 .comments {
   width: 100%;
   padding: 2.13vw;
@@ -111,6 +142,22 @@
 .commenter-id {
   font-weight: 600;
 }
+.comment-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2vw;
+}
+.comment-delete {
+  min-width: 12vw;
+  height: 7.2vw;
+  padding: 0 2.5vw;
+  border-radius: 2vw;
+  font-size: 3.2vw;
+  color: #d85c5c;
+  background: #fff1f1;
+  border: 0.3vw solid #ffd0d0;
+}
 .icons-and-time {
   display: flex;
   justify-content: space-between;
@@ -118,6 +165,35 @@
 .comment-icons i {
   margin: 0 1vw;
   font-size: 5.26vw;
+}
+.comment-like.active {
+  color: #e84c4f;
+}
+.child-comment-list {
+  margin-top: 2vw;
+  padding-left: 2vw;
+  border-left: 0.5vw solid #eeeeee;
+}
+.child-comment-item {
+  display: grid;
+  grid-template-columns: 8vw 1fr;
+  gap: 1.5vw;
+  padding: 2vw;
+  margin-top: 1.5vw;
+  border-radius: 2vw;
+  background: rgba(0, 0, 0, 0.03);
+}
+.child-comment-avatar {
+  width: 8vw;
+  height: 8vw;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.child-comment-user {
+  font-weight: 600;
+}
+.child-comment-info p {
+  margin-bottom: 1vw;
 }
 .push-comment {
   background: #5b9cf3;
@@ -128,4 +204,10 @@
 }
 .post-detials {
   padding-bottom: 15vw;
+}
+.type {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4.26vw;
+  padding: 2.13vw;
 }

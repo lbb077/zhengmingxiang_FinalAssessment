@@ -1,27 +1,19 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>social chat</title>
-    <!-- 首页图标 -->
     <link rel="icon" href="#" />
-    <!-- 引入字体图标 -->
     <link rel="stylesheet" href="./resources/iconfont/iconfont.css" />
-    <!-- 接入全局前置样式 -->
     <link rel="stylesheet" href="./css/base.css" />
-    <!-- 接入登录页面的样式 -->
     <link rel="stylesheet" href="./css/sign_in.css" />
-    <!-- 接入首页的样式 -->
     <link rel="stylesheet" href="./css/home.css" />
-    <!-- 接入详情页面的样式 -->
     <link rel="stylesheet" href="./css/detials.css" />
-    <!-- 接入个人页面的样式 -->
     <link rel="stylesheet" href="./css/personal.css" />
-    <!-- 接入消息页面的样式 -->
     <link rel="stylesheet" href="./css/message.css" />
-    <!-- 接入发布页面的样式 -->
     <link rel="stylesheet" href="./css/search-pulish.css" />
+    <link rel="stylesheet" href="./css/settings.css" />
   </head>
   <body>
     <div class="sign-in">
@@ -95,6 +87,7 @@
             <ul class="right-post-list"></ul>
           </div>
         </div>
+        <div class="for-you-loading">Loading...</div>
       </div>
       <div class="Follow">
         <div class="follow">
@@ -108,219 +101,17 @@
       </div>
       <div class="Topic">
         <div class="item-number">
-          <p>There are 100+ posts you're interested in</p>
+          <p class="topic-count">No topics yet</p>
+        </div>
+        <div class="topic-list">
+          <ul></ul>
         </div>
         <div class="topic">
           <div class="layout-left">
-            <ul>
-              <li class="item">
-                <div class="photo">
-                  <div class="post">
-                    <div class="post-head">
-                      <div class="avater">
-                        <div class="avater-img">
-                          <img
-                            src="./resources/test photos/test-user-img.jpg"
-                            alt=""
-                          />
-                        </div>
-                        <div class="avater-infos">
-                          <p class="avater-id">Rikka</p>
-                          <p class="time">12 hours ago</p>
-                        </div>
-                      </div>
-                      <i class="iconfont icon-a-gf-dots1"></i>
-                    </div>
-                    <img
-                      src="./resources/test photos/test-user-img.jpg"
-                      alt=""
-                      class="image"
-                    />
-                    <div class="description">
-                      <p>Post description</p>
-                      <div class="post-action">
-                        <i class="iconfont icon-24px"></i>
-                        <span>100+ Likes</span>
-                        <i class="iconfont icon-pinglun"></i>
-                        <span>100+ commonts</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="item">
-                <div class="only-text">
-                  <div class="post">
-                    <div class="post-head">
-                      <div class="avater">
-                        <div class="avater-img">
-                          <img
-                            src="./resources/test photos/test-user-img.jpg"
-                            alt=""
-                          />
-                        </div>
-                        <div class="avater-infos">
-                          <p class="avater-id">Rikka</p>
-                          <p class="time">3 hours ago</p>
-                        </div>
-                      </div>
-                      <i class="iconfont icon-a-gf-dots1"></i>
-                    </div>
-                    <p class="post-content">
-                      Body text for a post. Since it's a social app, sometimes
-                      it's a hot take, and sometimes it's a question.
-                    </p>
-                    <div class="description">
-                      <div class="post-action">
-                        <i class="iconfont icon-24px"></i>
-                        <span>100+ Likes</span>
-                        <i class="iconfont icon-pinglun"></i>
-                        <span>100+ commonts</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="item">
-                <div class="photo">
-                  <div class="post">
-                    <div class="post-head">
-                      <div class="avater">
-                        <div class="avater-img">
-                          <img
-                            src="./resources/test photos/test-user-img.jpg"
-                            alt=""
-                          />
-                        </div>
-                        <div class="avater-infos">
-                          <p class="avater-id">Rikka</p>
-                          <p class="time">3 hours ago</p>
-                        </div>
-                      </div>
-                      <i class="iconfont icon-a-gf-dots1"></i>
-                    </div>
-                    <img
-                      src="./resources/test photos/test-user-img.jpg"
-                      alt=""
-                      class="image"
-                    />
-                    <div class="description">
-                      <p>Post description</p>
-                      <div class="post-action">
-                        <i class="iconfont icon-24px"></i>
-                        <span>100+ Likes</span>
-                        <i class="iconfont icon-pinglun"></i>
-                        <span>100+ commonts</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            <ul class="topic-left-post-list"></ul>
           </div>
           <div class="layout-right">
-            <ul>
-              <li class="item">
-                <div class="only-text">
-                  <div class="post">
-                    <div class="post-head">
-                      <div class="avater">
-                        <div class="avater-img">
-                          <img
-                            src="./resources/test photos/test-user-img.jpg"
-                            alt=""
-                          />
-                        </div>
-                        <div class="avater-infos">
-                          <p class="avater-id">Rikka</p>
-                          <p class="time">3 hours ago</p>
-                        </div>
-                      </div>
-                      <i class="iconfont icon-a-gf-dots1"></i>
-                    </div>
-                    <p class="post-content">
-                      Small progress every day creates big change over time.
-                    </p>
-                    <div class="description">
-                      <div class="post-action">
-                        <i class="iconfont icon-24px"></i>
-                        <span>100+ Likes</span>
-                        <i class="iconfont icon-pinglun"></i>
-                        <span>100+ commonts</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="item">
-                <div class="photo">
-                  <div class="post">
-                    <div class="post-head">
-                      <div class="avater">
-                        <div class="avater-img">
-                          <img
-                            src="./resources/test photos/test-user-img.jpg"
-                            alt=""
-                          />
-                        </div>
-                        <div class="avater-infos">
-                          <p class="avater-id">Rikka</p>
-                          <p class="time">3 hours ago</p>
-                        </div>
-                      </div>
-                      <i class="iconfont icon-a-gf-dots1"></i>
-                    </div>
-                    <img
-                      src="./resources/test photos/test-user-img.jpg"
-                      alt=""
-                      class="image"
-                    />
-                    <div class="description">
-                      <p>Post description</p>
-                      <div class="post-action">
-                        <i class="iconfont icon-24px"></i>
-                        <span>100+ Likes</span>
-                        <i class="iconfont icon-pinglun"></i>
-                        <span>100+ commonts</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="item">
-                <div class="only-text">
-                  <div class="post">
-                    <div class="post-head">
-                      <div class="avater">
-                        <div class="avater-img">
-                          <img
-                            src="./resources/test photos/test-user-img.jpg"
-                            alt=""
-                          />
-                        </div>
-                        <div class="avater-infos">
-                          <p class="avater-id">Rikka</p>
-                          <p class="time">3 hours ago</p>
-                        </div>
-                      </div>
-                      <i class="iconfont icon-a-gf-dots1"></i>
-                    </div>
-                    <p class="post-content">
-                      Discipline matters more than motivation in difficult
-                      moments.
-                    </p>
-                    <div class="description">
-                      <div class="post-action">
-                        <i class="iconfont icon-24px"></i>
-                        <span>100+ Likes</span>
-                        <i class="iconfont icon-pinglun"></i>
-                        <span>100+ commonts</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            <ul class="topic-right-post-list"></ul>
           </div>
         </div>
       </div>
@@ -371,11 +162,7 @@
         </div>
       </div>
       <div class="add-comment">
-        <img
-          src="./resources/test photos/test-user-img.jpg"
-          alt="#"
-          class="detial-avater comment-avater"
-        />
+        <img src="" alt="#" class="detial-avater comment-avater" />
         <input
           type="text"
           placeholder="add your comment"
@@ -384,14 +171,16 @@
         />
         <button class="push-comment">submit</button>
       </div>
+      <div class="comment-sort">
+        <button class="sort-btn active" type="button" data-sort="1">
+          Time
+        </button>
+        <button class="sort-btn" type="button" data-sort="2">Likes</button>
+      </div>
       <div class="comments comment-list">
         <div class="comment-item">
           <div class="commenter">
-            <img
-              src="./resources/test photos/test-user-img.jpg"
-              alt="#"
-              class="detial-avater"
-            />
+            <img src="" alt="#" class="detial-avater" />
           </div>
           <div class="comment-info">
             <p class="commenter-id"></p>
@@ -411,304 +200,114 @@
     <div class="personal">
       <div class="navi-bar">
         <div class="User">
-          <img
-            src="./resources/test photos/test-user-img.jpg"
-            alt="#"
-            class="detial-avater"
-          />
-          <div class="notifications">99+</div>
+          <img src="" alt="#" class="detial-avater" />
+          <div class="notifications"></div>
         </div>
         <div class="icons">
           <i class="iconfont icon-add"></i>
           <i class="iconfont icon-settings"></i>
         </div>
       </div>
-      <div class="user-proflie-data">
-        <div class="Avater">
-          <div class="bg-circle">
-            <div class="border">
-              <img src="./resources/test photos/test-user-img.jpg" alt="#" />
-            </div>
-          </div>
-        </div>
-        <div class="data">
-          <ul>
-            <li class="posts"></li>
-            <li class="followers"></li>
-            <li class="following"></li>
-          </ul>
-          <ul>
-            <li class="">Posts</li>
-            <li class="">Followers</li>
-            <li class="">Following</li>
-          </ul>
-        </div>
-      </div>
-      <div class="userName-and-info">
-        <p class="username"></p>
-        <p class="desc"></p>
-        <div class="profile-follower">
-          <div class="avaters">
-            <div class="border" id="first-show-follower">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class=""
-              />
-            </div>
-            <div class="border" id="second-show-follower">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class=""
-              />
-            </div>
-            <div class="border" id="third-show-follower">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class=""
-              />
-            </div>
-          </div>
-          <div class="follower-desc">
-            <span>Followed by</span>
-            <span>username, username</span>
-            <p>and 100 others</p>
-          </div>
-        </div>
-        <div class="buttons">
-          <button class="edit-profile">Edit Profile</button>
-          <button class="message">
-            <i class="iconfont icon-message"></i>
-          </button>
-        </div>
-        <div class="tab-navi-bar">
-          <ul>
-            <li class="picked">
-              <i class="iconfont icon-wangge"></i>
-            </li>
-            <li>
-              <i class="iconfont icon-t-box-line"></i>
-            </li>
-            <li>
-              <i class="iconfont icon-drafts"></i>
-            </li>
-          </ul>
-        </div>
-        <div class="grid-photos-view">
-          <ul>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-          </ul>
-        </div>
-        <div class="text-view">
-          <ul>
-            <li class="plog">
-              <h3 class="plog-head">taffy</h3>
-              <p>灌注塔菲喵,灌注塔菲谢谢喵</p>
-              <div class="plog-info">
-                <p class="push-time">2025-4-20</p>
-                <div class="icons">
-                  <i class="iconfont icon-24px"></i>
-                  <i class="iconfont icon-pinglun"></i>
-                  <i class="iconfont icon-share"></i>
+      <div class="profile-head">
+        <img src="" class="profile-bg-img" alt="" />
+        <div class="profile-content">
+          <div class="user-proflie-data">
+            <div class="Avater">
+              <div class="bg-circle">
+                <div class="border">
+                  <img src="" alt="#" />
                 </div>
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
+          <div class="userName-and-info">
+            <p class="username"></p>
+            <p class="signature">111</p>
+            <div class="data">
+              <ul>
+                <li>
+                  <span class="posts"></span>
+                  <p>Posts</p>
+                </li>
+                <li>
+                  <span class="following"></span>
+                  <p>Following</p>
+                </li>
+                <li>
+                  <span class="followers"></span>
+                  <p>Followers</p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="buttons">
+              <button class="edit-profile">Edit Profile</button>
+              <button class="message">
+                <i class="iconfont icon-message"></i>
+              </button>
+            </div>
+            <div class="tab-navi-bar">
+              <ul>
+                <li class="picked">
+                  <i class="iconfont icon-wangge"></i>
+                </li>
+                <li>
+                  <i class="iconfont icon-t-box-line"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="posts-view">
+              <ul></ul>
+            </div>
+            <div class="draft-view">
+              <ul class="draft-list"></ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="other">
-      <div class="user-proflie-data">
-        <div class="Avater">
-          <div class="bg-circle">
-            <div class="border">
-              <img src="./resources/test photos/test-user-img.jpg" alt="#" />
-            </div>
-          </div>
-        </div>
-        <div class="data">
-          <ul>
-            <li class="posts">100</li>
-            <li class="followers">200</li>
-            <li class="following">300</li>
-          </ul>
-          <ul>
-            <li class="">Posts</li>
-            <li class="">Followers</li>
-            <li class="">Following</li>
-          </ul>
-        </div>
-      </div>
-      <div class="userName-and-info">
-        <p class="username">除草机</p>
-        <p class="desc">灌注塔菲喵,灌注塔菲谢谢喵</p>
-        <div class="profile-follower">
-          <div class="avaters">
-            <div class="border" id="first-show-follower">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class=""
-              />
-            </div>
-            <div class="border" id="second-show-follower">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class=""
-              />
-            </div>
-            <div class="border" id="third-show-follower">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class=""
-              />
-            </div>
-          </div>
-          <div class="follower-desc">
-            <span>Followed by</span>
-            <span>username, username</span>
-            <p>and 100 others</p>
-          </div>
-        </div>
-        <div class="buttons">
-          <button class="edit-profile">Follow</button>
-          <button class="message">
-            <i class="iconfont icon-message"></i>
-          </button>
-        </div>
-        <div class="tab-navi-bar">
-          <ul>
-            <li class="picked">
-              <i class="iconfont icon-wangge"></i>
-            </li>
-            <li>
-              <i class="iconfont icon-t-box-line"></i>
-            </li>
-          </ul>
-        </div>
-        <div class="grid-photos-view">
-          <ul>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-            <li>
-              <img
-                class="grid-photo"
-                src="./resources/test photos/test-user-img.jpg"
-                aly=""
-              />
-            </li>
-          </ul>
-        </div>
-        <div class="text-view">
-          <ul>
-            <li class="plog">
-              <h3 class="plog-head">taffy</h3>
-              <p>灌注塔菲喵,灌注塔菲谢谢喵</p>
-              <div class="plog-info">
-                <p class="push-time">2025-4-20</p>
-                <div class="icons">
-                  <i class="iconfont icon-24px"></i>
-                  <i class="iconfont icon-pinglun"></i>
-                  <i class="iconfont icon-share"></i>
+      <div class="profile-head">
+        <img src="" class="profile-bg-img" alt="" />
+        <div class="profile-content">
+          <div class="user-proflie-data">
+            <div class="Avater">
+              <div class="bg-circle">
+                <div class="border">
+                  <img src="" alt="#" />
                 </div>
               </div>
-            </li>
-            <li class="plog">
-              <h3 class="plog-head">taffy</h3>
-              <p>灌注塔菲喵,灌注塔菲谢谢喵</p>
-              <div class="plog-info">
-                <p class="push-time">2025-4-20</p>
-                <div class="icons">
-                  <i class="iconfont icon-24px"></i>
-                  <i class="iconfont icon-pinglun"></i>
-                  <i class="iconfont icon-share"></i>
-                </div>
-              </div>
-            </li>
-            <li class="plog">
-              <h3 class="plog-head">taffy</h3>
-              <p>灌注塔菲喵,灌注塔菲谢谢喵</p>
-              <div class="plog-info">
-                <p class="push-time">2025-4-20</p>
-                <div class="icons">
-                  <i class="iconfont icon-24px"></i>
-                  <i class="iconfont icon-pinglun"></i>
-                  <i class="iconfont icon-share"></i>
-                </div>
-              </div>
-            </li>
-          </ul>
+            </div>
+          </div>
+          <div class="userName-and-info">
+            <p class="username"></p>
+            <div class="data">
+              <ul>
+                <li>
+                  <span class="posts"></span>
+                  <p>Posts</p>
+                </li>
+                <li>
+                  <span class="following"></span>
+                  <p>Following</p>
+                </li>
+                <li>
+                  <span class="followers"></span>
+                  <p>Followers</p>
+                </li>
+              </ul>
+            </div>
+            <p class="desc"></p>
+            <div class="buttons">
+              <button class="follow-btn" type="button">Follow</button>
+              <button class="message" type="button">
+                <i class="iconfont icon-message"></i>
+              </button>
+            </div>
+            <div class="posts-view">
+              <ul></ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -720,119 +319,39 @@
           <li class="like">Likes</li>
           <li class="follow">Follow</li>
           <li class="comment">Comments</li>
+          <li class="star">Star</li>
+          <li class="like-comment">L and C</li>
         </ul>
       </div>
-      <div class="message-list">
-        <ul>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class="avater"
-              />
-            </div>
-            <div class="preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="the-last">灌注塔菲喵 灌注塔菲谢谢喵</p>
-            </div>
-          </li>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class="avater"
-              />
-            </div>
-            <div class="message-preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="the-last">灌注塔菲喵 灌注塔菲谢谢喵</p>
-            </div>
-          </li>
-        </ul>
+      <div class="message-list messageList-active">
+        <ul></ul>
       </div>
       <div class="like-list">
-        <ul>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class="avater"
-              />
-            </div>
-            <div class="preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="likes">like your post</p>
-            </div>
-          </li>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class="avater"
-              />
-            </div>
-            <div class="preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="likes">like your post</p>
-            </div>
-          </li>
-        </ul>
+        <ul></ul>
       </div>
       <div class="follow-list">
-        <ul>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class="avater"
-              />
-            </div>
-            <div class="preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="likes">start follow you</p>
-            </div>
-          </li>
-          <li class="message-item">
-            <div class="dot"></div>
-            <div class="avater">
-              <img
-                src="./resources/test photos/test-user-img.jpg"
-                alt=""
-                class="avater"
-              />
-            </div>
-            <div class="preview">
-              <h3 class="talker-name">Rikka</h3>
-              <p class="likes">start follow you</p>
-            </div>
-          </li>
-        </ul>
+        <ul></ul>
+      </div>
+      <div class="comment-list">
+        <ul></ul>
+      </div>
+      <div class="star-list">
+        <ul></ul>
+      </div>
+      <div class="like-comment-list">
+        <ul></ul>
       </div>
     </div>
     <div class="chat-page">
       <div class="chat-head">
         <div class="talker-info">
-          <i class="iconfont icon-arrowleft"></i>
+          <i class="iconfont icon-arrowleft back-btn"></i>
           <div class="talker">
-            <img
-              src="./resources/test photos/test-user-img.jpg"
-              alt=""
-              class="talker-img"
-            />
-          </div>
-          <div class="title">
-            <p class="talker-name">taffy</p>
-            <p class="active-time">2025-4-20</p>
+            <img src="" alt="" class="talker-img" />
+            <div class="talker-details">
+              <p class="talker-name">taffy</p>
+              <p class="active-time">Active 11m ago</p>
+            </div>
           </div>
         </div>
         <div class="head-icons">
@@ -840,45 +359,108 @@
           <i class="iconfont icon-shipin"></i>
         </div>
       </div>
-      <div class="chat-content"></div>
-      <div class="footer-input">
-        <input type="text" placeholder="message..." id="send-message" />
-        <div class="chat-icons">
-          <i class="iconfont icon-yuyin"></i>
-          <i class="iconfont icon-emoji"></i>
-          <i class="iconfont icon-icon-"></i>
+      <div class="chat-content">
+        <div class="timestamp"><span>Nov 30, 2023, 9:41 AM</span></div>
+        <div class="recipient-chat">
+          <div class="chat-bubble-row">
+            <img src="" alt="" class="avatar" />
+            <div class="message-bubbles">
+              <div class="message-bubble">Hmmm</div>
+            </div>
+          </div>
         </div>
+        <div class="sender-chat">
+          <div class="chat-bubble-row">
+            <div class="message-bubbles">
+              <div class="message-bubble"></div>
+            </div>
+          </div>
+        </div>
+        <div class="recipient-chat">
+          <div class="chat-bubble-row">
+            <img src="" alt="" class="avatar" />
+            <div class="message-bubbles">
+              <div class="message-bubble"></div>
+              <div class="message-bubble"></div>
+              <div class="message-bubble"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-input">
+        <div class="input-container">
+          <input type="text" placeholder="Message..." id="send-message" />
+          <span class="chat-icons">
+            <i class="iconfont icon-yuyin"></i>
+            <i class="iconfont icon-emoji"></i>
+            <i class="iconfont icon-icon-"></i>
+          </span>
+        </div>
+        <button class="send-btn">push</button>
       </div>
     </div>
     <div class="pulish-page">
+      <div class="pulish-top">
+        <a href="#home" class="pulish-back">
+          <i class="iconfont icon-arrowleft"></i>
+        </a>
+        <div>
+          <h2>Create Post</h2>
+          <p>Share something new</p>
+        </div>
+      </div>
       <div class="pulish-head">
         <div class="avater">
-          <img
-            src="./resources/test photos/test-user-img.jpg"
-            alt=""
-            class="avater-img"
-          />
+          <img src="" alt="" class="avater-img" />
         </div>
-        <input type="text" placeholder="add title" id="pulish-title" />
+        <input type="text" placeholder="Add a title" id="pulish-title" />
       </div>
       <div class="pulish-content">
-        <input type="file" multiple id="pulish-image" />
-        <label for="pulish-image">
-          <i class="iconfont icon-add"></i>
-        </label>
-        <textarea placeholder="add content" id="pulish-content"></textarea>
+        <div class="push-img">
+          <input type="file" multiple accept="image/*" id="pulish-image" />
+          <label for="pulish-image">
+            <i class="iconfont icon-add"></i>
+          </label>
+          <div class="show-photos">
+            <ul></ul>
+          </div>
+        </div>
+        <textarea placeholder="Write your post..." id="pulish-content"></textarea>
       </div>
+
       <div class="pulish-footer">
+        <div class="define">
+          <ul>
+            <li class="push-topic">
+              <input type="text" placeholder="Topic" id="topic" />
+            </li>
+            <li class="push-location">
+              <input
+                type="text"
+                placeholder="Location"
+                id="location"
+              />
+            </li>
+            <li class="choose-permission">
+              <button class="push-to-draft" data-permission="0">Draft</button>
+              <button class="public" data-permission="1">Public</button>
+              <button class="only-friends" data-permission="2">
+                Friends
+              </button>
+              <button class="only-me" data-permission="3">Only me</button>
+            </li>
+          </ul>
+        </div>
         <div class="fn-btns">
           <div class="add-topic">
-            <button id="add-topic">add topic</button>
-            <input class="input-topic" placeholder="topic" id="input-topic" />
+            <button id="add-topic">Add topic</button>
+            <input class="input-topic" placeholder="Topic" id="input-topic" />
           </div>
           <button id="at-friend">@friend</button>
         </div>
         <div class="pulish-btn">
-          <button id="draft" class="draft">draft</button>
-          <button id="pulish" class="pulish">pulish</button>
+          <button id="draft" class="draft">Draft</button>
+          <button id="pulish" class="pulish">Publish</button>
         </div>
       </div>
     </div>
@@ -891,28 +473,12 @@
         </div>
       </div>
       <div class="search-content">
-        <ul class="search-history">
-          <li class="item">
-            <p>taffy</p>
-          </li>
-          <li class="item">
-            <p>taffy</p>
-          </li>
-          <li class="item">
-            <p>taffy</p>
-          </li>
-        </ul>
-        <ul class="search-match">
-          <li class="item">
-            <p>taffy</p>
-          </li>
-          <li class="item">
-            <p>taffy</p>
-          </li>
-          <li class="item">
-            <p>taffy</p>
-          </li>
-        </ul>
+        <ul class="search-history"></ul>
+        <ul class="search-match"></ul>
+      </div>
+      <div class="search-recommend">
+        <h3>Recommend</h3>
+        <ul class="search-recommend-list"></ul>
       </div>
     </div>
     <div class="search-result-page">
@@ -923,146 +489,73 @@
         <div class="head-title">
           <h2>
             There are
-            <span class="result-count">100+</span>
+            <span class="result-count"></span>
             results
           </h2>
         </div>
       </div>
       <div class="search-result">
-        <ul class="items">
-          <li class="match-item">
-            <div class="photo">
-              <div class="post">
-                <div class="post-head">
-                  <div class="avater">
-                    <div class="avater-img">
-                      <img
-                        src="./resources/test photos/test-user-img.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="avater-infos">
-                      <p class="avater-id">Rikka</p>
-                      <p class="time">3 hours ago</p>
-                    </div>
-                  </div>
-                  <i class="iconfont icon-a-gf-dots1"></i>
-                </div>
-                <img
-                  src="./resources/test photos/test-user-img.jpg"
-                  alt=""
-                  class="image"
-                />
-                <div class="description">
-                  <p>Post description</p>
-                  <div class="post-action">
-                    <i class="iconfont icon-24px"></i>
-                    <span>100+ Likes</span>
-                    <div class="pinlun">
-                      <i class="iconfont icon-pinglun" id="pinlun"></i>
-                      <span>100+ commonts</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="hot-comment">
-                  <div class="hot">
-                    <i class="iconfont icon-fire"></i>
-                    <span class="hot-number">100+</span>
-                  </div>
-                  <p class="hot-content">666</p>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="match-item">
-            <div class="photo">
-              <div class="post">
-                <div class="post-head">
-                  <div class="avater">
-                    <div class="avater-img">
-                      <img
-                        src="./resources/test photos/test-user-img.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="avater-infos">
-                      <p class="avater-id">Rikka</p>
-                      <p class="time">3 hours ago</p>
-                    </div>
-                  </div>
-                  <i class="iconfont icon-a-gf-dots1"></i>
-                </div>
-                <img
-                  src="./resources/test photos/test-user-img.jpg"
-                  alt=""
-                  class="image"
-                />
-                <div class="description">
-                  <p>Post description</p>
-                  <div class="post-action">
-                    <i class="iconfont icon-24px"></i>
-                    <span>100+ Likes</span>
-                    <div class="pinlun">
-                      <i class="iconfont icon-pinglun" id="pinlun"></i>
-                      <span>100+ commonts</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="hot-comment">
-                  <div class="hot">
-                    <i class="iconfont icon-fire"></i>
-                    <span class="hot-number">100+</span>
-                  </div>
-                  <p class="hot-content">666</p>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="match-item">
-            <div class="photo">
-              <div class="post">
-                <div class="post-head">
-                  <div class="avater">
-                    <div class="avater-img">
-                      <img
-                        src="./resources/test photos/test-user-img.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="avater-infos">
-                      <p class="avater-id">Rikka</p>
-                      <p class="time">3 hours ago</p>
-                    </div>
-                  </div>
-                  <i class="iconfont icon-a-gf-dots1"></i>
-                </div>
-                <img
-                  src="./resources/test photos/test-user-img.jpg"
-                  alt=""
-                  class="image"
-                />
-                <div class="description">
-                  <p>Post description</p>
-                  <div class="post-action">
-                    <i class="iconfont icon-24px"></i>
-                    <span>100+ Likes</span>
-                    <div class="pinlun">
-                      <i class="iconfont icon-pinglun" id="pinlun"></i>
-                      <span>100+ commonts</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="hot-comment">
-                  <div class="hot">
-                    <i class="iconfont icon-fire"></i>
-                    <span class="hot-number">100+</span>
-                  </div>
-                  <p class="hot-content">666</p>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <ul class="items"></ul>
+      </div>
+    </div>
+    <div class="settings-page">
+      <div class="settings-head">
+        <i class="iconfont icon-arrowleft settings-back"></i>
+        <h2>Settings</h2>
+      </div>
+      <ul class="settings-list">
+        <li class="settings-item">
+          <div>
+            <h3>Avatar</h3>
+            <p>Change your profile photo</p>
+          </div>
+          <label for="avatar-file" class="settings-label">Choose</label>
+          <input type="file" id="avatar-file" class="settings-file" />
+        </li>
+        <li class="settings-item">
+          <div>
+            <h3>Background</h3>
+            <p>Change your profile background</p>
+          </div>
+          <label for="background-file" class="settings-label">Choose</label>
+          <input type="file" id="background-file" class="settings-file" />
+        </li>
+        <li class="settings-item username-setting">
+          <div>
+            <h3>Username</h3>
+            <input
+              type="text"
+              id="setting-username"
+              placeholder="edit your username"
+            />
+          </div>
+          <button class="save-username" type="button">Save</button>
+        </li>
+        <li class="settings-item signature-setting">
+          <div>
+            <h3>Signature</h3>
+            <input
+              type="text"
+              id="setting-signature"
+              placeholder="edit your signature"
+            />
+          </div>
+          <button class="save-signature" type="button">Save</button>
+        </li>
+        <li class="settings-item logout-item">
+          <div>
+            <h3>Log out</h3>
+            <p>Clear local login data</p>
+          </div>
+          <button class="logout-btn" type="button">Log out</button>
+        </li>
+      </ul>
+    </div>
+    <div class="search-transition">
+      <div class="search-transition-wave"></div>
+      <div class="search-transition-input">
+        <span>Search...</span>
+        <i class="iconfont icon-sousuo"></i>
       </div>
     </div>
     <div class="bottom-top-bar">
