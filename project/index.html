@@ -400,11 +400,20 @@
       </div>
     </div>
     <div class="pulish-page">
+      <div class="pulish-top">
+        <a href="#home" class="pulish-back">
+          <i class="iconfont icon-arrowleft"></i>
+        </a>
+        <div>
+          <h2>Create Post</h2>
+          <p>Share something new</p>
+        </div>
+      </div>
       <div class="pulish-head">
         <div class="avater">
           <img src="" alt="" class="avater-img" />
         </div>
-        <input type="text" placeholder="add title" id="pulish-title" />
+        <input type="text" placeholder="Add a title" id="pulish-title" />
       </div>
       <div class="pulish-content">
         <div class="push-img">
@@ -416,42 +425,42 @@
             <ul></ul>
           </div>
         </div>
-        <textarea placeholder="add content" id="pulish-content"></textarea>
+        <textarea placeholder="Write your post..." id="pulish-content"></textarea>
       </div>
 
       <div class="pulish-footer">
         <div class="define">
           <ul>
             <li class="push-topic">
-              <input type="text" placeholder="input your topic" id="topic" />
+              <input type="text" placeholder="Topic" id="topic" />
             </li>
             <li class="push-location">
               <input
                 type="text"
-                placeholder="input your location"
+                placeholder="Location"
                 id="location"
               />
             </li>
             <li class="choose-permission">
-              <button class="push-to-draft" data-permission="0">draft</button>
-              <button class="public" data-permission="1">public</button>
+              <button class="push-to-draft" data-permission="0">Draft</button>
+              <button class="public" data-permission="1">Public</button>
               <button class="only-friends" data-permission="2">
-                only friends
+                Friends
               </button>
-              <button class="only-me" data-permission="3">only me</button>
+              <button class="only-me" data-permission="3">Only me</button>
             </li>
           </ul>
         </div>
         <div class="fn-btns">
           <div class="add-topic">
-            <button id="add-topic">add topic</button>
-            <input class="input-topic" placeholder="topic" id="input-topic" />
+            <button id="add-topic">Add topic</button>
+            <input class="input-topic" placeholder="Topic" id="input-topic" />
           </div>
           <button id="at-friend">@friend</button>
         </div>
         <div class="pulish-btn">
-          <button id="draft" class="draft">draft</button>
-          <button id="pulish" class="pulish">pulish</button>
+          <button id="draft" class="draft">Draft</button>
+          <button id="pulish" class="pulish">Publish</button>
         </div>
       </div>
     </div>
@@ -541,6 +550,13 @@
           <button class="logout-btn" type="button">Log out</button>
         </li>
       </ul>
+    </div>
+    <div class="search-transition">
+      <div class="search-transition-wave"></div>
+      <div class="search-transition-input">
+        <span>Search...</span>
+        <i class="iconfont icon-sousuo"></i>
+      </div>
     </div>
     <div class="bottom-top-bar">
       <ul>

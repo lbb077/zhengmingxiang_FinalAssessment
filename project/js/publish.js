@@ -18,6 +18,20 @@ let oldImageUrls = [];
 let currentPermission = 1;
 let editPostId = "";
 let editDraftId = "";
+let canClickPublishAction = true;
+
+function runPublishAction(callback) {
+  if (!canClickPublishAction) {
+    return;
+  }
+
+  canClickPublishAction = false;
+  callback();
+
+  setTimeout(() => {
+    canClickPublishAction = true;
+  }, 1000);
+}
 
 function renderPublishAvatar() {
   const token = localStorage.getItem("token");
@@ -525,11 +539,15 @@ permissionButtons.forEach((button) => {
 });
 
 addEvent(publishButton, "click", () => {
-  createPost(currentPermission);
+  runPublishAction(() => {
+    createPost(currentPermission);
+  });
 });
 
 addEvent(draftButton, "click", () => {
-  saveDraft();
+  runPublishAction(() => {
+    saveDraft();
+  });
 });
 
 window.addEventListener("hashchange", () => {

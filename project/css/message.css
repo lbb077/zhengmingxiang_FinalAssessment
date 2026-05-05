@@ -1,10 +1,13 @@
 .message-page {
   width: 100%;
+  min-height: 100vh;
+  background: #f5f5f7;
 }
 .message-head {
   font-size: 8.8vw;
   font-weight: 600;
-  padding: 4.26vw 3.26vw;
+  padding: 5vw 4.26vw 3vw;
+  color: #111111;
 }
 .message-item {
   display: flex;
@@ -22,10 +25,17 @@
   width: 12.78vw;
   height: 12.78vw;
   border-radius: 50%;
+  overflow: hidden;
 }
 .session-avatar {
   float: left;
   margin-right: 2.56vw;
+}
+.session-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .session-name {
   font-weight: 600;
@@ -39,7 +49,7 @@
   color: rgba(0, 0, 0, 0.7);
 }
 .category {
-  padding: 0 3.26vw;
+  padding: 0 4.26vw;
   overflow: hidden;
 }
 .category ul {
@@ -47,18 +57,34 @@
   grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
   gap: 2.13vw;
+  padding: 1vw;
+  background: #e9e9ec;
+  border-radius: 5vw;
 }
 .category li {
-  padding: 2.13vw 2.78vw;
-  border-radius: 10vw;
-  border: 0.78vw solid #e6e6e6;
-  font-size: 4.26vw;
-  transition: all 0.3s ease;
+  min-height: 10vw;
+  padding: 0 2.78vw;
+  border-radius: 4vw;
+  color: #6e6e73;
+  font-size: 3.8vw;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
   text-align: center;
+  line-height: 10vw;
+}
+.category li:active {
+  transform: scale(0.97);
 }
 .category-picked {
-  background: #000000;
-  color: #ffffff;
+  background: #ffffff;
+  color: #111111;
+  font-weight: 600;
+  box-shadow:
+    0 1vw 3vw rgba(0, 0, 0, 0.08),
+    inset 0 0.2vw 0 rgba(255, 255, 255, 0.9);
 }
 .chat-page {
   width: 100%;
@@ -215,8 +241,8 @@
 }
 
 .chat-bubble-row .avatar {
-  width: 6.15vw;
-  height: 6.15vw;
+  width: 8.2vw;
+  height: 8.2vw;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
@@ -313,14 +339,18 @@
 .footer-input {
   position: absolute;
   bottom: 24vw;
-  left: 0;
-  right: 0;
+  left: 4.1vw;
+  right: 4.1vw;
   display: flex;
   align-items: center;
-  padding: 0 4.1vw;
+  padding: 2.2vw;
   gap: 2vw;
   box-sizing: border-box;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.9);
+  border: 0.078vw solid rgba(0, 0, 0, 0.06);
+  border-radius: 6vw;
+  box-shadow: 0 3vw 10vw rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4vw);
 }
 
 .input-container {
@@ -328,16 +358,19 @@
   min-width: 0;
   display: flex;
   align-items: center;
-  padding: 2.05vw 3vw;
-  background: #ffffff;
-  border: 0.26vw solid #e0e0e0;
-  border-radius: 2.05vw;
+  min-height: 11vw;
+  padding: 0 3vw;
+  background: #f5f5f7;
+  border-radius: 4.5vw;
   box-sizing: border-box;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .input-container:focus-within {
-  border-color: #9a9a9a;
-  box-shadow: 0 0 0 0.21vw rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  box-shadow: 0 0 0 0.35vw rgba(0, 0, 0, 0.1);
 }
 
 .input-container input {
@@ -365,7 +398,7 @@
 .input-container .chat-icons {
   display: flex;
   align-items: center;
-  gap: 1.5vw;
+  gap: 1vw;
   flex-shrink: 0;
 }
 
@@ -373,25 +406,32 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5.13vw;
-  height: 5.13vw;
-  font-size: 5.13vw;
-  color: rgba(0, 0, 0, 0.7);
-  transition: all 0.2s ease;
+  width: 7.5vw;
+  height: 7.5vw;
+  background: #ffffff;
+  border-radius: 50%;
+  font-size: 4.7vw;
+  color: rgba(0, 0, 0, 0.64);
+  box-shadow: 0 0.8vw 2.4vw rgba(0, 0, 0, 0.06);
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .input-container .chat-icons i:active {
   color: #000000;
-  transform: scale(1.1);
+  background: #f0f0f2;
+  transform: scale(0.94);
 }
 
 .send-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18vw;
-  height: 10.26vw;
-  margin-left: 2vw;
+  width: 17vw;
+  height: 11vw;
+  margin-left: 0;
   font-family:
     Inter,
     -apple-system,
@@ -400,16 +440,25 @@
   font-size: 3.59vw;
   font-weight: 600;
   color: #ffffff;
-  background: #5179ef;
-  border-radius: 2.05vw;
-  transition: all 0.2s ease;
+  background: #111111;
+  border-radius: 4.5vw;
+  box-shadow:
+    0 1.5vw 4vw rgba(0, 0, 0, 0.22),
+    inset 0 0.2vw 0 rgba(255, 255, 255, 0.18);
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
   flex-shrink: 0;
   box-sizing: border-box;
 }
 
 .send-btn:active {
-  transform: scale(0.98);
-  background: #3d63d9;
+  transform: scale(0.96);
+  background: #000000;
+  box-shadow:
+    0 0.8vw 2.4vw rgba(0, 0, 0, 0.18),
+    inset 0 0.2vw 0 rgba(255, 255, 255, 0.12);
 }
 
 .send-btn.sending {

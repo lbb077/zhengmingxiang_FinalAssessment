@@ -1,4 +1,5 @@
-.personal {
+.personal,
+.other {
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
@@ -13,7 +14,8 @@
     ),
     linear-gradient(180deg, #fafafa 0%, #f4f5f7 45%, #eeeeef 100%);
 }
-.personal * {
+.personal *,
+.other * {
   max-width: 100%;
 }
 .navi-bar {
@@ -63,7 +65,8 @@
   position: relative;
   overflow: hidden;
 }
-.personal .profile-head {
+.personal .profile-head,
+.other .profile-head {
   overflow: visible;
 }
 .profile-bg-img {
@@ -77,32 +80,10 @@
   object-fit: contain;
   object-position: center;
 }
-.personal .profile-bg-img {
+.personal .profile-bg-img,
+.other .profile-bg-img {
   height: 42vw;
   object-fit: cover;
-  opacity: 0.72;
-  filter: saturate(72%) contrast(0.96);
-}
-.personal .profile-head::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100%;
-  height: 48vw;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.08),
-      rgba(245, 246, 248, 0.86)
-    ),
-    radial-gradient(
-      circle at 28% 18%,
-      rgba(255, 255, 255, 0.64),
-      transparent 30vw
-    );
-  pointer-events: none;
 }
 .profile-content {
   position: relative;
@@ -125,7 +106,8 @@
   width: 24vw;
   height: 24vw;
 }
-.personal .Avater .bg-circle {
+.personal .Avater .bg-circle,
+.other .Avater .bg-circle {
   border: 0.3vw solid rgba(255, 255, 255, 0.86);
   box-shadow:
     0 2vw 5.8vw rgba(15, 23, 42, 0.13),
@@ -136,7 +118,8 @@
   width: 22.5vw;
   height: 22.5vw;
 }
-.personal .Avater .border {
+.personal .Avater .border,
+.other .Avater .border {
   border: 0.22vw solid rgba(255, 255, 255, 0.92);
 }
 .Avater .border img {
@@ -148,7 +131,8 @@
   padding: 2.13vw;
   font-size: 4.26vw;
 }
-.personal .userName-and-info {
+.personal .userName-and-info,
+.other .userName-and-info {
   padding: 2.13vw 4vw 0;
 }
 .userName-and-info .username {
@@ -163,7 +147,8 @@
   border-radius: 2.5vw;
   box-shadow: 0 0.5vw 2vw rgba(0, 0, 0, 0.04);
 }
-.personal .userName-and-info .data {
+.personal .userName-and-info .data,
+.other .userName-and-info .data {
   margin: 2.5vw 0;
   padding: 3vw;
   background:
@@ -203,6 +188,7 @@
 }
 .userName-and-info .desc {
   color: rgba(0, 0, 0, 0.7);
+  overflow-wrap: anywhere;
 }
 .buttons {
   display: grid;
@@ -210,7 +196,8 @@
   gap: 2.13vw;
   padding-bottom: 2.13vw;
 }
-.personal .buttons {
+.personal .buttons,
+.other .buttons {
   display: grid;
   grid-template-columns: 1fr 10.8vw;
   gap: 2.13vw;
@@ -223,7 +210,8 @@
   font-size: 4.26vw;
   font-weight: 600;
 }
-.personal .buttons button {
+.personal .buttons button,
+.other .buttons button {
   min-height: 10.8vw;
   background:
     linear-gradient(
@@ -246,7 +234,8 @@
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
-.personal .buttons button:active {
+.personal .buttons button:active,
+.other .buttons button:active {
   transform: scale(0.98);
   box-shadow:
     0 0.8vw 2vw rgba(15, 23, 42, 0.08),
@@ -414,8 +403,14 @@
   font-weight: 500;
 }
 .other .follow-btn {
-  background: #000000;
-  color: #ffffff;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.78),
+      rgba(244, 245, 247, 0.7)
+    ),
+    rgba(255, 255, 255, 0.58);
+  color: rgba(17, 24, 39, 0.9);
 }
 .del-or-draft button {
   min-width: 12vw;
@@ -552,6 +547,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .personal .buttons button,
+  .other .buttons button,
   .personal .tab-navi-bar ul li {
     transition: none;
   }

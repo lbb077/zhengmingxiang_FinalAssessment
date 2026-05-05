@@ -2,6 +2,9 @@
 import request from "./request.js";
 
 const searchBar = getElement(".home .search-bar");
+const homeSearchInput = getElement("#go-to-search");
+const searchPage = getElement(".search-page");
+const searchPageInput = getElement("#to-search");
 const forYou = getElement(".ForYou");
 const leftPostList = getElement(".left-post-list");
 const rightPostList = getElement(".right-post-list");
@@ -15,16 +18,105 @@ const topicRightPostList = getElement(".topic-right-post-list");
 const topicPostBox = getElement(".Topic .topic");
 const modeToggle = getElement(".mode-toggle");
 const modeBtn = getElements(".mode-toggle button");
+const searchTransition = getElement(".search-transition");
+const searchTransitionInput = getElement(".search-transition-input");
+const searchTransitionWave = getElement(".search-transition-wave");
 
 let forYouLastPostId = 0;
 let forYouLimit = 10;
 let forYouPostCount = 0;
 let isForYouLoading = false;
 let hasMoreForYouPosts = true;
+let forYouPostObserver = null;
+let isSearchTransitioning = false;
 
 addEvent(searchBar, "click", () => {
-  window.location.hash = "#search";
+  playSearchTransition();
 });
+
+function resetSearchTransition() {
+  isSearchTransitioning = false;
+  searchBar.classList.remove("search-hidden");
+  searchTransition.classList.remove("active", "wave-active", "fade-out");
+  searchTransitionInput.style.left = "";
+  searchTransitionInput.style.top = "";
+  searchTransitionInput.style.width = "";
+  searchTransitionInput.style.height = "";
+  searchTransitionInput.style.transform = "";
+  searchTransitionWave.style.left = "";
+  searchTransitionWave.style.top = "";
+}
+
+function getSearchPageInputRect() {
+  const oldDisplay = searchPage.style.display;
+  const oldVisibility = searchPage.style.visibility;
+  const oldPosition = searchPage.style.position;
+  const oldInset = searchPage.style.inset;
+  const oldPointerEvents = searchPage.style.pointerEvents;
+
+  searchPage.style.display = "block";
+  searchPage.style.visibility = "hidden";
+  searchPage.style.position = "fixed";
+  searchPage.style.inset = "0";
+  searchPage.style.pointerEvents = "none";
+
+  const rect = searchPageInput.getBoundingClientRect();
+
+  searchPage.style.display = oldDisplay;
+  searchPage.style.visibility = oldVisibility;
+  searchPage.style.position = oldPosition;
+  searchPage.style.inset = oldInset;
+  searchPage.style.pointerEvents = oldPointerEvents;
+
+  return rect;
+}
+
+function playSearchTransition() {
+  if (isSearchTransitioning) {
+    return;
+  }
+
+  isSearchTransitioning = true;
+
+  const startRect = homeSearchInput.getBoundingClientRect();
+  const targetRect = getSearchPageInputRect();
+  const moveX = targetRect.left - startRect.left;
+  const moveY = targetRect.top - startRect.top;
+  const waveX = targetRect.left + targetRect.width / 2;
+  const waveY = targetRect.top + targetRect.height / 2;
+
+  searchTransitionInput.style.left = `${startRect.left}px`;
+  searchTransitionInput.style.top = `${startRect.top}px`;
+  searchTransitionInput.style.width = `${startRect.width}px`;
+  searchTransitionInput.style.height = `${startRect.height}px`;
+  searchTransitionWave.style.left = `${waveX}px`;
+  searchTransitionWave.style.top = `${waveY}px`;
+
+  searchTransition.classList.add("active");
+  searchBar.classList.add("search-hidden");
+
+  setTimeout(() => {
+    searchTransitionInput.style.width = `${targetRect.width}px`;
+    searchTransitionInput.style.height = `${targetRect.height}px`;
+    searchTransitionInput.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  }, 20);
+
+  setTimeout(() => {
+    searchTransition.classList.add("wave-active");
+  }, 300);
+
+  setTimeout(() => {
+    window.location.hash = "#search";
+  }, 650);
+
+  setTimeout(() => {
+    searchTransition.classList.add("fade-out");
+  }, 720);
+
+  setTimeout(() => {
+    resetSearchTransition();
+  }, 950);
+}
 
 //首页帖子模式的切换函数 点击对应的顶部bar栏按钮 切换对应的模式 并且indicater移动到对应的模式下面去的
 export function switchHomeMode(index) {
@@ -107,6 +199,50 @@ function bindForYouEvents() {
   });
 }
 
+function showForYouPost(item) {
+  item.classList.add("show-post");
+  item.dataset.observed = "1";
+}
+
+function getForYouPostObserver() {
+  if (forYouPostObserver) {
+    return forYouPostObserver;
+  }
+
+  forYouPostObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        return;
+      }
+
+      showForYouPost(entry.target);
+      forYouPostObserver.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.15,
+  });
+
+  return forYouPostObserver;
+}
+
+function observeForYouPosts() {
+  const items = getElements(".for-you .item");
+
+  items.forEach((item) => {
+    if (item.dataset.observed === "1") {
+      return;
+    }
+
+    if (!window.IntersectionObserver) {
+      showForYouPost(item);
+      return;
+    }
+
+    item.dataset.observed = "1";
+    getForYouPostObserver().observe(item);
+  });
+}
+
 function renderPosts(postsData) {
   leftPostList.innerHTML = "";
   rightPostList.innerHTML = "";
@@ -149,6 +285,10 @@ function renderPosts(postsData) {
                       alt=""
                       class="image"
                     />
+                    <div class="post-summary">
+                      <p class="post-title">${title}</p>
+                      <p class="time">${time}</p>
+                    </div>
                     <div class="description">
                       <p>${content}</p> 
                       <div class="post-action">
@@ -177,6 +317,10 @@ function renderPosts(postsData) {
                       <p class="avater-id">${userName}</p>
                       <i class="iconfont icon-a-gf-dots1"></i>
                     </div>
+                    <div class="post-summary">
+                      <p class="post-title">${title}</p>
+                      <p class="time">${time}</p>
+                    </div>
                     <p class="post-content">
                       ${content}
                     </p>
@@ -199,6 +343,8 @@ function renderPosts(postsData) {
       rightPostList.innerHTML += html;
     }
   });
+
+  observeForYouPosts();
 }
 
 function getUserAvatar(user) {
@@ -266,13 +412,7 @@ function appendPosts(postsData) {
                           alt=""
                         />
                       </div>
-                      <div class="post-head-info">
-                        <div class="post-meta">
-                          <p class="avater-id">${userName}</p>
-                          <p class="time">${time}</p>
-                        </div>
-                        <p class="post-title">${title}</p>
-                      </div>
+                      <p class="avater-id">${userName}</p>
                       <i class="iconfont icon-a-gf-dots1"></i>
                     </div>
                     <img
@@ -341,6 +481,8 @@ function appendPosts(postsData) {
 
     forYouPostCount++;
   });
+
+  observeForYouPosts();
 }
 
 function getTopicButtons() {
@@ -525,16 +667,14 @@ function renderTopicPosts(posts) {
                 <div class="avater-img">
                   <img ${avatarSrc} alt="" />
                 </div>
-                <div class="post-head-info">
-                  <div class="post-meta">
-                    <p class="avater-id">${userName}</p>
-                    <p class="time">${time}</p>
-                  </div>
-                  <p class="post-title">${title}</p>
-                </div>
+                <p class="avater-id">${userName}</p>
                 <i class="iconfont icon-a-gf-dots1"></i>
               </div>
               <img src="${image}" alt="" class="image" />
+              <div class="post-summary">
+                <p class="post-title">${title}</p>
+                <p class="time">${time}</p>
+              </div>
               <div class="description">
                 <p>${content}</p>
                 <div class="post-action">
@@ -557,14 +697,12 @@ function renderTopicPosts(posts) {
                 <div class="avater-img">
                   <img ${avatarSrc} alt="" />
                 </div>
-                <div class="post-head-info">
-                  <div class="post-meta">
-                    <p class="avater-id">${userName}</p>
-                    <p class="time">${time}</p>
-                  </div>
-                  <p class="post-title">${title}</p>
-                </div>
+                <p class="avater-id">${userName}</p>
                 <i class="iconfont icon-a-gf-dots1"></i>
+              </div>
+              <div class="post-summary">
+                <p class="post-title">${title}</p>
+                <p class="time">${time}</p>
               </div>
               <p class="post-content">${content}</p>
               <div class="description">

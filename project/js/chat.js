@@ -66,6 +66,8 @@ function getChatHistory(userId) {
   const params = {
     senderId: Number(myId),
     receiverId: Number(userId),
+    pageNum: 1,
+    pageSize: 10,
   };
 
   console.log("Get chat history params:", params);
@@ -88,7 +90,8 @@ function getChatHistory(userId) {
         return [];
       }
 
-      return result.data.records || [];
+      const records = result.data.records || [];
+      return records.reverse();
     })
     .catch((error) => {
       console.log("Request chat history failed:", error);
